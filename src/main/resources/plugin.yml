@@ -1,0 +1,60 @@
+name: EMCTech
+author: Sefiraat
+description: EMC Plugin
+main: io.github.sefiraat.emctech.EmcTech
+website: https://github.com/Sefiraat/EMCTech
+version: ${project.version}
+api-version: 1.17
+depend:
+  - Slimefun
+softdepend:
+  - ExoticGarden
+  - ColoredEnderChests
+  - LuckyBlocks
+  - HotbarPets
+  - SoulJars
+  - ElectricSpawners
+  - PrivateStorage
+  - ExtraGear
+  - ExtraHeads
+  - SlimefunOreChunks
+  - DyedBackpacks
+  - SlimyTreeTaps
+  - MobCapturer
+  - LiteXpansion
+  - EcoPower
+  - HardcoreSlimefun
+  - SoundMuffler
+  - ExtraTools
+  - TranscEndence
+  - MoreTools
+  - FluffyMachines
+  - InfinityExpansion
+  - SimpleUtils
+  - FoxyMachines
+  - GlobalWarming
+  - SlimefunWarfare
+  - Liquid
+  - DynaTech
+  - SlimyRepair
+  - SlimeCustomizer
+  - SimpleMaterialGenerators
+  - SimpleStorage
+  - AlchimiaVitae
+  - SlimeTinker
+  - PotionExpansion
+  - FlowerPower
+  - Galactifun
+  - FNAmplifications
+  - ElementManipulation
+  - CrystamaeHistoria
+  - DankTech2
+  - Networks
+  - VillagerUtil
+  - MissileWarfare
+  - SupremeExpansion
+  - Bump
+commands:
+  emctech:
+    description: /emctech
+    usage: /emctech <sub>

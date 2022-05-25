@@ -56,7 +56,6 @@ public class EmcTech extends JavaPlugin implements SlimefunAddon {
         commandManager.registerCommand(new EmcTechMain());
 
         EmcItems.setup();
-
         EmcGenerator.setup();
     }
 

@@ -95,7 +95,7 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
             // Item can be EMC'd
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(templateItemStack);
             final double emcValue = slimefunItem == null ? EmcUtils.getEmcValueMultiplied(templateItemStack) : EmcUtils.getEmcValueMultiplied(slimefunItem);
-            final int requiredPower = Math.min((int) emcValue, 10000000);
+            final int requiredPower = Math.max(Math.min((int) emcValue, 10000000), 1);
             final Player player = getOwner(block);
 
             if (player != null && EmcStorage.hasEnoughEmc(player, emcValue) && getCharge(block.getLocation()) >= requiredPower) {

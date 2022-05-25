@@ -167,7 +167,16 @@
             <version>MODIFIED_1.0.7</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.Sefiraat</groupId>
+            <artifactId>DankTech2</artifactId>
+            <version>d2465ae845</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.Mooy1</groupId>
+            <artifactId>InfinityExpansion</artifactId>
+            <version>1e83e7afa0</version>
+        </dependency>
     </dependencies>
 
 </project>

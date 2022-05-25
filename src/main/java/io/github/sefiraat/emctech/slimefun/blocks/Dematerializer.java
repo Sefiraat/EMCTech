@@ -101,7 +101,7 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
             // Item can be EMC'd and matches the given template item
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(inputItemStack);
             final double emcValue = slimefunItem == null ? EmcUtils.getEmcValue(inputItemStack) : EmcUtils.getEmcValue(slimefunItem);
-            final int requiredPower = Math.min((int) emcValue / 10, 10000000);
+            final int requiredPower = Math.max(Math.min((int) emcValue / 10, 10000000), 1);
             final Player player = getOwner(block);
             if (player != null && getCharge(block.getLocation()) >= requiredPower) {
                 removeCharge(block.getLocation(), requiredPower);

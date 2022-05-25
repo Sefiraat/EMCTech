@@ -15,8 +15,6 @@ import io.github.sefiraat.emctech.utils.Theme;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.text.DecimalFormat;
-
 @CommandAlias("emctech|emc")
 public class EmcTechMain extends BaseCommand {
 

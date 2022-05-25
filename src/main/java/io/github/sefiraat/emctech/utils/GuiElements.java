@@ -1,6 +1,5 @@
 package io.github.sefiraat.emctech.utils;
 
-import io.github.bakedlibs.dough.collections.Pair;
 import io.github.sefiraat.sefilib.string.StringUtils;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import net.md_5.bungee.api.ChatColor;
@@ -76,7 +75,7 @@ public final class GuiElements {
     public static ItemStack getItemNotLearnedIcon(@Nonnull String name) {
         return new CustomItemStack(
             Material.BARRIER,
-            Theme.ERROR + StringUtils.toTitleCase(name),
+            Theme.ERROR + name,
             MessageFormat.format("{0}{1}NOT LEARNED", Theme.RESEARCH.getColor(), ChatColor.BOLD),
             Theme.ERROR + "This item has not yet been learned."
         );

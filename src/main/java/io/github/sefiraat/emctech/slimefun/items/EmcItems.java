@@ -6,7 +6,6 @@ import io.github.sefiraat.emctech.slimefun.blocks.Dematerializer;
 import io.github.sefiraat.emctech.slimefun.blocks.Materializer;
 import io.github.sefiraat.emctech.slimefun.blocks.NodeMaterializer;
 import io.github.sefiraat.emctech.slimefun.groups.EmcTechItemGroups;
-import io.github.sefiraat.networks.slimefun.NetworkSlimefunItems;
 import io.github.sefiraat.networks.slimefun.NetworksSlimefunItemStacks;
 import io.github.sefiraat.sefilib.itemstacks.GeneralItemStackUtils;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -251,7 +250,7 @@ public class EmcItems {
             EmcStacks.UNORTHODOX_MACHINE_FRAME,
             RecipeType.ENHANCED_CRAFTING_TABLE,
             new ItemStack[]{
-                SlimefunItems.SOLDER_INGOT, SlimefunItems.COMPRESSOR, SlimefunItems.SOLDER_INGOT,
+                SlimefunItems.SOLDER_INGOT, SlimefunItems.ENDER_RUNE, SlimefunItems.SOLDER_INGOT,
                 SlimefunItems.SOLDER_INGOT, EmcStacks.UNORTHODOX_FRAME, SlimefunItems.SOLDER_INGOT,
                 SlimefunItems.SOLDER_INGOT, SlimefunItems.MEDIUM_CAPACITOR, SlimefunItems.SOLDER_INGOT
             }

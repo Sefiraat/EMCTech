@@ -49,7 +49,7 @@ public class MainFlexGroup extends FlexItemGroup {
     @Override
     @ParametersAreNonnullByDefault
     public void open(Player p, PlayerProfile profile, SlimefunGuideMode mode) {
-        final ChestMenu chestMenu = new ChestMenu(Theme.MAIN.getColor() + "Crystamae Magic Compendium");
+        final ChestMenu chestMenu = new ChestMenu(Theme.MAIN.getColor() + "EMC Tech");
 
         for (int slot : HEADER) {
             chestMenu.addItem(slot, ChestMenuUtils.getBackground(), (player1, i1, itemStack, clickAction) -> false);

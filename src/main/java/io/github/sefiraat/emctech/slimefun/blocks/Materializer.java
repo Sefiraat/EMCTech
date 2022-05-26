@@ -61,7 +61,7 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return;
         }
-        if (!EmcUtils.canEmc(itemStack)) {
+        if (!EmcUtils.canEmc(itemStack) || !EmcUtils.hasEmcValue(itemStack)) {
             reject(blockMenu, itemStack);
         } else if (itemStack.getAmount() > 1) {
             rejectOverage(blockMenu, itemStack);
@@ -95,11 +95,17 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
             // Item can be EMC'd
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(templateItemStack);
             final double emcValue = slimefunItem == null ? EmcUtils.getEmcValueMultiplied(templateItemStack) : EmcUtils.getEmcValueMultiplied(slimefunItem);
+
+            if (emcValue == 0) {
+                return;
+            }
+
             final int requiredPower = Math.max(Math.min((int) emcValue, 10000000), 1);
             final Player player = getOwner(block);
+            final int currentCharge = getCharge(block.getLocation());
 
-            if (player != null && EmcStorage.hasEnoughEmc(player, emcValue) && getCharge(block.getLocation()) >= requiredPower) {
-                if (!EmcStorage.hasLearnedItem(player, slimefunItem == null ? templateItemStack.getType().name() : slimefunItem.getId(), true)) {
+            if (player != null && EmcStorage.hasEnoughEmc(player, emcValue) && currentCharge >= requiredPower) {
+                if (!EmcStorage.hasLearnedItem(player, slimefunItem == null ? templateItemStack.getType().name() : slimefunItem.getId(), slimefunItem == null)) {
                     return;
                 }
 

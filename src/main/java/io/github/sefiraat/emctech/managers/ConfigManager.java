@@ -13,8 +13,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConfigManager {
@@ -24,11 +26,21 @@ public class ConfigManager {
     private final Json playerEmc;
     private final Json playerLearnedItems;
 
+    private final List<String> blacklistedAddons = new ArrayList<>();
+
     public ConfigManager() {
         instance = this;
 
         this.playerEmc = new Json("player_emc.yml", "plugins/EMCTech");
         this.playerLearnedItems = new Json("learned_items.yml", "plugins/EMCTech");
+
+        final ConfigurationSection section = EmcTech.getInstance().getConfig().getConfigurationSection("blacklisted-addons");
+        for (String key : section.getKeys(false)) {
+            if (section.getBoolean(key)) {
+                blacklistedAddons.add(key);
+            }
+        }
+
     }
 
     /**
@@ -108,6 +120,19 @@ public class ConfigManager {
 
     public boolean debuggingMessages() {
         return EmcTech.getInstance().getConfig().getBoolean("debug-messages", false);
+    }
+
+    public List<String> getBlacklistedAddons() {
+        return this.blacklistedAddons;
+    }
+
+    public static boolean isAddonBlacklisted(@Nonnull String addonName) {
+        for (String blacklistedAddon : instance.getBlacklistedAddons()) {
+            if (blacklistedAddon.equals(addonName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Nonnull

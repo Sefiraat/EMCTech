@@ -76,7 +76,7 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
 
     @ParametersAreNonnullByDefault
     private void setupPage(Player player, PlayerProfile profile, SlimefunGuideMode mode, ChestMenu menu, int page) {
-        final List<String> entries = new ArrayList<>(EmcGenerator.getVanillaEmcValues().keySet());
+        final List<String> entries = new ArrayList<>(EmcGenerator.getVanillaEmcValuesFiltered().keySet());
         final int numberOfEntries = entries.size();
         final int totalPages = (int) Math.ceil(numberOfEntries / (double) PAGE_SIZE);
         final int start = (page - 1) * PAGE_SIZE;

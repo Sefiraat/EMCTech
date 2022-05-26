@@ -77,7 +77,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
 
     @ParametersAreNonnullByDefault
     private void setupPage(Player player, PlayerProfile profile, SlimefunGuideMode mode, ChestMenu menu, int page) {
-        final List<String> entries = new ArrayList<>(EmcGenerator.getSlimefunEmcValues().keySet());
+        final List<String> entries = new ArrayList<>(EmcGenerator.getSlimefunEmcValuesFiltered().keySet());
         final int numberOfEntries = entries.size();
         final int totalPages = (int) Math.ceil(numberOfEntries / (double) PAGE_SIZE);
         final int start = (page - 1) * PAGE_SIZE;
@@ -120,7 +120,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
                 if (mode == SlimefunGuideMode.CHEAT_MODE || learned) {
                     menu.replaceExistingItem(slot, GuiElements.getItemLearnedIcon(slimefunItem.getItem(), slimefunItem.getItemName(), EmcUtils.getEmcValue(slimefunItem), EmcUtils.getEmcValueMultiplied(slimefunItem)));
                 } else {
-                    menu.replaceExistingItem(slot, GuiElements.getItemNotLearnedIcon(entry));
+                    menu.replaceExistingItem(slot, GuiElements.getItemNotLearnedIcon(slimefunItem.getItemName()));
                 }
             } else {
                 menu.replaceExistingItem(slot, null);
@@ -161,7 +161,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
         final ChatColor passive = Theme.PASSIVE.getColor();
         final List<String> lore = new ArrayList<>();
 
-        lore.add(MessageFormat.format("{0}Slimefun Items Learned: {1}{2}/{3}", color, passive, EmcStorage.getAmountLearned(player, true), size));
+        lore.add(MessageFormat.format("{0}Slimefun Items Learned: {1}{2}/{3}", color, passive, EmcStorage.getAmountLearned(player, false), size));
 
         return new CustomItemStack(
             Material.TARGET,

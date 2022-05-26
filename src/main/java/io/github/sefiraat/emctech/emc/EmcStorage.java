@@ -110,7 +110,5 @@ public final class EmcStorage {
         double newValue = currentValue - emcValue;
         ConfigManager.getPlayerEmc().getFileData().insert(path, newValue);
     }
-
-
 }
 

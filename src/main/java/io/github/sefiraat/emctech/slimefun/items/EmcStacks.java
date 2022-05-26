@@ -72,7 +72,7 @@ public class EmcStacks {
             ItemStackGenerators.createEnchantedItemStack(Material.COAL, true, new Pair<>(Enchantment.LURE, 1)),
             Theme.CRAFTING,
             "Unorthodox Coal",
-            "The molecules in this coal has been",
+            "The molecules in this coal have been",
             "rearranged. Seemingly with little effect."
         );
 
@@ -105,7 +105,7 @@ public class EmcStacks {
             ItemStackGenerators.createEnchantedItemStack(Material.COAL, true, new Pair<>(Enchantment.LURE, 1)),
             Theme.CRAFTING,
             "Deviant Coal",
-            "The molecules in this coal has been",
+            "The molecules in this coal have been",
             "rearranged. The faintest power can be",
             "felt from within."
         );
@@ -139,7 +139,7 @@ public class EmcStacks {
             ItemStackGenerators.createEnchantedItemStack(Material.COAL, true, new Pair<>(Enchantment.LURE, 1)),
             Theme.CRAFTING,
             "Divergent Coal",
-            "The molecules in this coal has been",
+            "The molecules in this coal have been",
             "rearranged. A strong power can be",
             "felt from within."
         );
@@ -173,7 +173,7 @@ public class EmcStacks {
             ItemStackGenerators.createEnchantedItemStack(Material.COAL, true, new Pair<>(Enchantment.LURE, 1)),
             Theme.CRAFTING,
             "Anomalous Coal",
-            "The molecules in this coal has been",
+            "The molecules in this coal have been",
             "rearranged. An intense power can be",
             "felt from within."
         );
@@ -207,7 +207,7 @@ public class EmcStacks {
             ItemStackGenerators.createEnchantedItemStack(Material.COAL, true, new Pair<>(Enchantment.LURE, 1)),
             Theme.CRAFTING,
             "Perfected Coal",
-            "The molecules in this coal has been",
+            "The molecules in this coal have been",
             "rearranged. The radiating power can",
             "barely be measured."
         );

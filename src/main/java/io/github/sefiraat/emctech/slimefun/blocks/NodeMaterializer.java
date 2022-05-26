@@ -62,7 +62,7 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return;
         }
-        if (!EmcUtils.canEmc(itemStack)) {
+        if (!EmcUtils.canEmc(itemStack) || !EmcUtils.hasEmcValue(itemStack)) {
             reject(blockMenu, itemStack);
         } else if (itemStack.getAmount() > 1) {
             rejectOverage(blockMenu, itemStack);
@@ -97,7 +97,12 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
             // Item can be EMC'd
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(templateItemStack);
             final double emcValue = slimefunItem == null ? EmcUtils.getEmcValueMultiplied(templateItemStack) : EmcUtils.getEmcValueMultiplied(slimefunItem);
-            final int requiredPower = Math.min((int) emcValue, 10000000);
+
+            if (emcValue == 0) {
+                return;
+            }
+
+            final int requiredPower = Math.max(Math.min((int) emcValue, 10000000), 1);
             final Player player = getOwner(block);
 
             if (player != null && EmcStorage.hasEnoughEmc(player, emcValue) && getCharge(block.getLocation()) >= requiredPower) {

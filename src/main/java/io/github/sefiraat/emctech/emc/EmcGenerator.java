@@ -50,15 +50,28 @@ public final class EmcGenerator {
 
     private static void setupVanilla() {
         for (Material material : Material.values()) {
+            sendDebugMessage(0, "Setup Stage for: " + material.name());
             if (!material.isLegacy() && material.isItem()) {
                 final String string = material.name();
-                if (VANILLA_EMC_VALUES.containsKey(string)) {
-                    // This item is in the config file, we can skip it
-                    continue;
-                }
                 final ItemStack itemStack = new ItemStack(material);
-                getItemValueVanilla(itemStack, new ArrayList<>(), 0, true);
-                getItemValueVanilla(itemStack, new ArrayList<>(), 0, false);
+                final Double smallValue = VANILLA_EMC_VALUES.get(string);
+                final Double multiValue = VANILLA_EMC_VALUES_MULTIPLIED.get(string);
+
+                if (multiValue != null) {
+                    // This item is in the config file, we can skip it
+                    sendDebugMessage(0, "This item has already been added either via config or a previous item's calculations: " + multiValue);
+                } else {
+                    sendDebugMessage(0, "Calculating Multiplied Value.");
+                    getItemValueVanilla(itemStack, new ArrayList<>(), 1, true);
+                }
+
+                if (smallValue != null) {
+                    // This item is in the config file, we can skip it
+                    sendDebugMessage(0, "This item has already been added either via config or a previous item's calculations: " + smallValue);
+                } else {
+                    sendDebugMessage(0, "Calculating Multiplied Value.");
+                    getItemValueVanilla(itemStack, new ArrayList<>(), 1, false);
+                }
             }
         }
     }
@@ -182,7 +195,9 @@ public final class EmcGenerator {
     }
 
     private static double processSmithingRecipe(@Nonnull SmithingRecipe smithingRecipe, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
-        return (getItemValueVanilla(smithingRecipe.getBase().getItemStack(), history, nestingLevel + 1, multiplier) * (multiplier ? MULTIPLIER : 1)) / smithingRecipe.getResult().getAmount();
+        double baseValue = getItemValueVanilla(smithingRecipe.getBase().getItemStack(), history, nestingLevel + 1, multiplier) * (multiplier ? MULTIPLIER : 1);
+        double additionValue = getItemValueVanilla(smithingRecipe.getAddition().getItemStack(), history, nestingLevel + 1, multiplier) * (multiplier ? MULTIPLIER : 1);
+        return (baseValue + additionValue) / smithingRecipe.getResult().getAmount();
     }
 
     private static double processStonecuttingRecipe(@Nonnull StonecuttingRecipe stonecuttingRecipe, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
@@ -191,21 +206,35 @@ public final class EmcGenerator {
 
     private static void setupSlimefun() {
         for (SlimefunItem item : Slimefun.getRegistry().getEnabledSlimefunItems()) {
-            if (EmcUtils.ALLOWABLE_RECIPE_TYPES.contains(item.getRecipeType())) {
-                final String string = item.getId();
-                if (SLIMEFUN_EMC_VALUES.containsKey(string)) {
-                    // This item is in the config file, we can skip it
-                    continue;
-                }
-                getItemValueSlimefun(item, new ArrayList<>(), 0, true);
-                getItemValueSlimefun(item, new ArrayList<>(), 0, false);
+            final String id = item.getId();
+            final Double smallValue = SLIMEFUN_EMC_VALUES.get(id);
+            final Double multiValue = SLIMEFUN_EMC_VALUES_MULTIPLIED.get(id);
+
+            sendDebugMessage(0, "Processing: " + id);
+
+            if (multiValue != null) {
+                // This item is in the config file, we can skip it
+                sendDebugMessage(0, "This item has already been added either via config or a previous item's calculations.");
+            } else {
+                sendDebugMessage(0, "Calculating Multiplied Value.");
+                getItemValueSlimefun(item, new ArrayList<>(), 1, true);
+
+            }
+
+            if (smallValue != null) {
+                // This item is in the config file, we can skip it
+                sendDebugMessage(0, "This item has already been added either via config or a previous item's calculations.");
+            } else {
+                sendDebugMessage(0, "Calculating Basic Value.");
+                getItemValueSlimefun(item, new ArrayList<>(), 1, false);
+
             }
         }
     }
 
     private static double getItemValueSlimefun(@Nonnull SlimefunItem slimefunItem, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
-        sendDebugMessage(nestingLevel, "Processing: " + slimefunItem.getId());
         final Double storedValue = multiplier ? SLIMEFUN_EMC_VALUES_MULTIPLIED.get(slimefunItem.getId()) : SLIMEFUN_EMC_VALUES.get(slimefunItem.getId());
+        sendDebugMessage(0, "Processing: " + slimefunItem.getId());
 
         if (storedValue != null) {
             // This item has previously been evaluated or is base, so we can return it
@@ -213,11 +242,26 @@ public final class EmcGenerator {
             return storedValue;
         }
 
+        if (slimefunItem.isDisabled()) {
+            sendDebugMessage(nestingLevel, "Item is disabled.");
+            return 0;
+        }
+
+        if (ConfigManager.isAddonBlacklisted(slimefunItem.getAddon().getName())) {
+            sendDebugMessage(nestingLevel, "Item is from a blacklisted addon.");
+            return 0;
+        }
+
         final String id = slimefunItem.getId();
 
         if (history.contains(id)) {
             sendDebugMessage(nestingLevel, "Resulting in a loop, exiting out.");
             // This item was not found in the EMC values but is in the history, so we are looping
+            return 0;
+        }
+
+        if (!EmcUtils.ALLOWABLE_RECIPE_TYPES.contains(slimefunItem.getRecipeType())) {
+            sendDebugMessage(nestingLevel, "Item is from a RecipeType that has not been allowed.");
             return 0;
         }
 
@@ -276,19 +320,40 @@ public final class EmcGenerator {
     }
 
     public static Map<String, Double> getVanillaEmcValues() {
-        return VANILLA_EMC_VALUES;
+        return Map.copyOf(VANILLA_EMC_VALUES);
     }
 
     public static Map<String, Double> getSlimefunEmcValues() {
-        return SLIMEFUN_EMC_VALUES;
+        return Map.copyOf(SLIMEFUN_EMC_VALUES);
     }
 
     public static Map<String, Double> getMultipliedVanillaEmcValues() {
-        return VANILLA_EMC_VALUES_MULTIPLIED;
+        return Map.copyOf(VANILLA_EMC_VALUES_MULTIPLIED);
     }
 
-    public static Map<String, Double> getMultipliedSlimefunEmcValues() {
-        return SLIMEFUN_EMC_VALUES_MULTIPLIED;
+    public static Map<String, Double> getMultipliedSlimefunEmcValue() {
+        return Map.copyOf(SLIMEFUN_EMC_VALUES_MULTIPLIED);
+    }
+
+    public static Map<String, Double> getVanillaEmcValuesFiltered() {
+        return cleanMap(new HashMap<>(VANILLA_EMC_VALUES));
+    }
+
+    public static Map<String, Double> getSlimefunEmcValuesFiltered() {
+        return cleanMap(new HashMap<>(SLIMEFUN_EMC_VALUES));
+    }
+
+    public static Map<String, Double> getMultipliedVanillaEmcValuesFiltered() {
+        return cleanMap(new HashMap<>(VANILLA_EMC_VALUES_MULTIPLIED));
+    }
+
+    public static Map<String, Double> getMultipliedSlimefunEmcValuesFiltered() {
+        return cleanMap(new HashMap<>(SLIMEFUN_EMC_VALUES_MULTIPLIED));
+    }
+
+    private static Map<String, Double> cleanMap(Map<String, Double> map) {
+        map.values().removeIf(aDouble -> aDouble == 0.00);
+        return map;
     }
 
     public static void sendDebugMessage(int nestingLevel, String... strings) {

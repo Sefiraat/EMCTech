@@ -48,8 +48,8 @@ public class EmcTech extends JavaPlugin implements SlimefunAddon {
         saveDefaultConfig();
         tryUpdate();
 
-        this.supportedPluginManager = new SupportedPluginManager();
         this.configManager = new ConfigManager();
+        this.supportedPluginManager = new SupportedPluginManager();
         this.runnableManager = new RunnableManager();
         this.commandManager = new PaperCommandManager(this);
 

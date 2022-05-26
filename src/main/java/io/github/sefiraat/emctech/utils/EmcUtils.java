@@ -31,6 +31,10 @@ public final class EmcUtils {
         ALLOWABLE_RECIPE_TYPES.add(RecipeType.PRESSURE_CHAMBER);
         ALLOWABLE_RECIPE_TYPES.add(RecipeType.HEATED_PRESSURE_CHAMBER);
         ALLOWABLE_RECIPE_TYPES.add(RecipeType.COMPRESSOR);
+        ALLOWABLE_RECIPE_TYPES.add(RecipeType.ANCIENT_ALTAR);
+        ALLOWABLE_RECIPE_TYPES.add(RecipeType.MAGIC_WORKBENCH);
+        ALLOWABLE_RECIPE_TYPES.add(RecipeType.REFINERY);
+        ALLOWABLE_RECIPE_TYPES.add(RecipeType.GRIND_STONE);
 
         final EmcTech plugin = EmcTech.getInstance();
 
@@ -49,56 +53,60 @@ public final class EmcUtils {
         return !itemStack.hasItemMeta() || SlimefunItem.getByItem(itemStack) != null;
     }
 
+    public static boolean hasEmcValue(@Nonnull ItemStack itemStack) {
+        return getEmcValue(itemStack) > 0;
+    }
+
     public static double getEmcValue(@Nonnull ItemStack itemStack) {
         final SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
 
         if (slimefunItem == null) {
-            return EmcGenerator.getVanillaEmcValues().getOrDefault(itemStack.getType().name(), 0.00);
+            return EmcGenerator.getVanillaEmcValuesFiltered().getOrDefault(itemStack.getType().name(), 0.00);
         } else {
-            return EmcGenerator.getSlimefunEmcValues().getOrDefault(slimefunItem.getId(), 0.00);
+            return EmcGenerator.getSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
         }
     }
 
     public static double getEmcValue(@Nonnull String string) {
-        return EmcGenerator.getVanillaEmcValues().getOrDefault(string, 0.00);
+        return EmcGenerator.getVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
     }
 
     public static double getEmcValue(@Nonnull String string, boolean vanilla) {
         if (vanilla) {
-            return EmcGenerator.getVanillaEmcValues().getOrDefault(string, 0.00);
+            return EmcGenerator.getVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
         } else {
-            return EmcGenerator.getSlimefunEmcValues().getOrDefault(string, 0.00);
+            return EmcGenerator.getSlimefunEmcValuesFiltered().getOrDefault(string, 0.00);
         }
     }
 
     public static double getEmcValue(@Nonnull SlimefunItem slimefunItem) {
-        return EmcGenerator.getSlimefunEmcValues().getOrDefault(slimefunItem.getId(), 0.00);
+        return EmcGenerator.getSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
     }
 
     public static double getEmcValueMultiplied(@Nonnull ItemStack itemStack) {
         final SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
 
         if (slimefunItem == null) {
-            return EmcGenerator.getMultipliedVanillaEmcValues().getOrDefault(itemStack.getType().name(), 0.00);
+            return EmcGenerator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(itemStack.getType().name(), 0.00);
         } else {
-            return EmcGenerator.getMultipliedSlimefunEmcValues().getOrDefault(slimefunItem.getId(), 0.00);
+            return EmcGenerator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
         }
     }
 
     public static double getEmcValueMultiplied(@Nonnull String string) {
-        return EmcGenerator.getMultipliedVanillaEmcValues().getOrDefault(string, 0.00);
+        return EmcGenerator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
     }
 
     public static double getEmcValueMultiplied(@Nonnull String string, boolean vanilla) {
         if (vanilla) {
-            return EmcGenerator.getMultipliedVanillaEmcValues().getOrDefault(string, 0.00);
+            return EmcGenerator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
         } else {
-            return EmcGenerator.getMultipliedSlimefunEmcValues().getOrDefault(string, 0.00);
+            return EmcGenerator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(string, 0.00);
         }
     }
 
     public static double getEmcValueMultiplied(@Nonnull SlimefunItem slimefunItem) {
-        return EmcGenerator.getMultipliedSlimefunEmcValues().getOrDefault(slimefunItem.getId(), 0.00);
+        return EmcGenerator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
     }
 
     public static void addValidRecipeType(@Nonnull RecipeType recipeType) {

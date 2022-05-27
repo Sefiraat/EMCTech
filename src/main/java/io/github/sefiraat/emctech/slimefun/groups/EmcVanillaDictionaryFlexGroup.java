@@ -1,6 +1,6 @@
 package io.github.sefiraat.emctech.slimefun.groups;
 
-import io.github.sefiraat.emctech.emc.EmcGenerator;
+import io.github.sefiraat.emctech.emc.EmcCalculator;
 import io.github.sefiraat.emctech.emc.EmcStorage;
 import io.github.sefiraat.emctech.utils.EmcUtils;
 import io.github.sefiraat.emctech.utils.GuiElements;
@@ -76,7 +76,7 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
 
     @ParametersAreNonnullByDefault
     private void setupPage(Player player, PlayerProfile profile, SlimefunGuideMode mode, ChestMenu menu, int page) {
-        final List<String> entries = new ArrayList<>(EmcGenerator.getVanillaEmcValuesFiltered().keySet());
+        final List<String> entries = new ArrayList<>(EmcCalculator.getVanillaEmcValuesFiltered().keySet());
         final int numberOfEntries = entries.size();
         final int totalPages = (int) Math.ceil(numberOfEntries / (double) PAGE_SIZE);
         final int start = (page - 1) * PAGE_SIZE;
@@ -89,7 +89,13 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
         reapplyFooter(player, profile, mode, menu, page, totalPages);
 
         // Back
-        menu.replaceExistingItem(GUIDE_BACK, ChestMenuUtils.getBackButton(player, Slimefun.getLocalization().getMessage("guide.back.guide")));
+        menu.replaceExistingItem(
+            GUIDE_BACK,
+            ChestMenuUtils.getBackButton(
+                player,
+                Slimefun.getLocalization().getMessage("guide.back.guide")
+            )
+        );
         menu.addMenuClickHandler(GUIDE_BACK, (player1, slot, itemStack, clickAction) -> {
             SlimefunGuide.openItemGroup(profile, EmcTechItemGroups.MAIN, mode, 1);
             return false;
@@ -107,7 +113,14 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
                 final boolean learned = EmcStorage.hasLearnedItem(player, entry, true);
 
                 if (mode == SlimefunGuideMode.CHEAT_MODE || learned) {
-                    menu.replaceExistingItem(slot, GuiElements.getItemLearnedIcon(Material.valueOf(entry), entry, EmcUtils.getEmcValue(entry), EmcUtils.getEmcValueMultiplied(entry)));
+                    menu.replaceExistingItem(
+                        slot,
+                        GuiElements.getItemLearnedIcon(Material.valueOf(entry),
+                                                       entry,
+                                                       EmcUtils.getEmcValue(entry),
+                                                       EmcUtils.getEmcValueMultiplied(entry)
+                        )
+                    );
                 } else {
                     menu.replaceExistingItem(slot, GuiElements.getItemNotLearnedIcon(entry));
                 }
@@ -119,7 +132,13 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
     }
 
     @ParametersAreNonnullByDefault
-    private void reapplyFooter(Player p, PlayerProfile profile, SlimefunGuideMode mode, ChestMenu menu, int page, int totalPages) {
+    private void reapplyFooter(Player p,
+                               PlayerProfile profile,
+                               SlimefunGuideMode mode,
+                               ChestMenu menu,
+                               int page,
+                               int totalPages
+    ) {
         for (int slot : FOOTER) {
             menu.replaceExistingItem(slot, ChestMenuUtils.getBackground());
             menu.addMenuClickHandler(slot, ((player, i, itemStack, clickAction) -> false));
@@ -150,7 +169,13 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
         final ChatColor passive = Theme.PASSIVE.getColor();
         final List<String> lore = new ArrayList<>();
 
-        lore.add(MessageFormat.format("{0}Vanilla Items Learned: {1}{2}/{3}", color, passive, EmcStorage.getAmountLearned(player, true), size));
+        lore.add(MessageFormat.format(
+            "{0}Vanilla Items Learned: {1}{2}/{3}",
+            color,
+            passive,
+            EmcStorage.getAmountLearned(player, true),
+            size
+        ));
 
         return new CustomItemStack(
             Material.TARGET,

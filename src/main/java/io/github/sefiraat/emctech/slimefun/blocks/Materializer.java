@@ -44,18 +44,35 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
 
     private final int capacity;
 
-    public Materializer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int ticksRequired, int capacity) {
+    public Materializer(ItemGroup itemGroup,
+                        SlimefunItemStack item,
+                        RecipeType recipeType,
+                        ItemStack[] recipe,
+                        int ticksRequired,
+                        int capacity
+    ) {
         super(itemGroup, item, recipeType, recipe, ticksRequired);
         this.capacity = capacity;
     }
 
-    public Materializer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, @Nullable ItemStack recipeOutput, int ticksRequired, int capacity) {
+    public Materializer(ItemGroup itemGroup,
+                        SlimefunItemStack item,
+                        RecipeType recipeType,
+                        ItemStack[] recipe,
+                        @Nullable ItemStack recipeOutput,
+                        int ticksRequired,
+                        int capacity
+    ) {
         super(itemGroup, item, recipeType, recipe, recipeOutput, ticksRequired);
         this.capacity = capacity;
     }
 
     @Override
-    protected void onEachTickFirst(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onEachTickFirst(@Nonnull BlockMenu blockMenu,
+                                   @Nonnull Block block,
+                                   @Nonnull SlimefunItem item,
+                                   @Nonnull Config data
+    ) {
         final ItemStack itemStack = blockMenu.getItemInSlot(TEMPLATE_SLOT);
 
         if (itemStack == null || itemStack.getType() == Material.AIR) {
@@ -75,7 +92,7 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
 
     @Override
     public int[] getOutputSlots() {
-        return new int[] {OUTPUT_SLOT};
+        return new int[]{OUTPUT_SLOT};
     }
 
     @Override
@@ -84,7 +101,11 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
     }
 
     @Override
-    protected void onValidTick(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onValidTick(@Nonnull BlockMenu blockMenu,
+                               @Nonnull Block block,
+                               @Nonnull SlimefunItem item,
+                               @Nonnull Config data
+    ) {
         final ItemStack templateItemStack = blockMenu.getItemInSlot(TEMPLATE_SLOT);
 
         if (templateItemStack == null || templateItemStack.getType() == Material.AIR) {
@@ -94,7 +115,9 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
         if (EmcUtils.canEmc(templateItemStack)) {
             // Item can be EMC'd
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(templateItemStack);
-            final double emcValue = slimefunItem == null ? EmcUtils.getEmcValueMultiplied(templateItemStack) : EmcUtils.getEmcValueMultiplied(slimefunItem);
+            final double emcValue = slimefunItem == null ?
+                                    EmcUtils.getEmcValueMultiplied(templateItemStack) :
+                                    EmcUtils.getEmcValueMultiplied(slimefunItem);
 
             if (emcValue == 0) {
                 return;
@@ -105,7 +128,12 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
             final int currentCharge = getCharge(block.getLocation());
 
             if (player != null && EmcStorage.hasEnoughEmc(player, emcValue) && currentCharge >= requiredPower) {
-                if (!EmcStorage.hasLearnedItem(player, slimefunItem == null ? templateItemStack.getType().name() : slimefunItem.getId(), slimefunItem == null)) {
+                if (!EmcStorage.hasLearnedItem(player,
+                                               slimefunItem == null ?
+                                               templateItemStack.getType().name() :
+                                               slimefunItem.getId(),
+                                               slimefunItem == null
+                )) {
                     return;
                 }
 
@@ -150,7 +178,8 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
 
             @Override
             public boolean canOpen(@Nonnull Block block, @Nonnull Player player) {
-                return Slimefun.getProtectionManager().hasPermission(player, block.getLocation(), Interaction.INTERACT_BLOCK);
+                return Slimefun.getProtectionManager()
+                               .hasPermission(player, block.getLocation(), Interaction.INTERACT_BLOCK);
             }
 
             @Override

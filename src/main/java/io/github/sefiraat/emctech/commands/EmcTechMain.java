@@ -41,7 +41,10 @@ public class EmcTechMain extends BaseCommand {
         if (sender instanceof Player commandIssuer) {
             commandIssuer.sendMessage(Theme.MAIN + player.getName() + "'s current EMC: " + EmcStorage.getEmc(player));
         } else {
-            EmcTech.getInstance().getLogger().info(Theme.MAIN + player.getName() + "'s current EMC: " + EmcUtils.EMC_FORMAT.format(EmcStorage.getEmc(player)));
+            EmcTech.getInstance()
+                   .getLogger()
+                   .info(Theme.MAIN + player.getName() + "'s current EMC: " + EmcUtils.EMC_FORMAT.format(EmcStorage.getEmc(
+                       player)));
         }
     }
 

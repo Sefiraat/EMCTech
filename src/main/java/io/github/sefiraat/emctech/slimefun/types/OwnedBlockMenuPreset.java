@@ -13,12 +13,19 @@ public abstract class OwnedBlockMenuPreset extends BlockMenuPreset {
     @Nonnull
     private final OwnedVariableTickRateItem ownedVariableTickRateItem;
 
-    protected OwnedBlockMenuPreset(@Nonnull String id, @Nonnull String title, @Nonnull OwnedVariableTickRateItem ownedVariableTickRateItem) {
+    protected OwnedBlockMenuPreset(@Nonnull String id,
+                                   @Nonnull String title,
+                                   @Nonnull OwnedVariableTickRateItem ownedVariableTickRateItem
+    ) {
         super(id, title);
         this.ownedVariableTickRateItem = ownedVariableTickRateItem;
     }
 
-    protected OwnedBlockMenuPreset(@Nonnull String id, @Nonnull String title, boolean universal, @Nonnull OwnedVariableTickRateItem ownedVariableTickRateItem) {
+    protected OwnedBlockMenuPreset(@Nonnull String id,
+                                   @Nonnull String title,
+                                   boolean universal,
+                                   @Nonnull OwnedVariableTickRateItem ownedVariableTickRateItem
+    ) {
         super(id, title, universal);
         this.ownedVariableTickRateItem = ownedVariableTickRateItem;
     }
@@ -31,6 +38,11 @@ public abstract class OwnedBlockMenuPreset extends BlockMenuPreset {
             return;
         }
 
-        ownedVariableTickRateItem.addCache(b, new OwnedVariableTickRateItem.OwnedBlockCache(UUID.fromString(playerString), ownedVariableTickRateItem.getTicksRequired()));
+        ownedVariableTickRateItem.addCache(b,
+                                           new OwnedVariableTickRateItem.OwnedBlockCache(
+                                               UUID.fromString(playerString),
+                                               ownedVariableTickRateItem.getTicksRequired()
+                                           )
+        );
     }
 }

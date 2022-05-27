@@ -52,7 +52,11 @@ public final class GuiElements {
     );
 
     @ParametersAreNonnullByDefault
-    public static ItemStack getItemLearnedIcon(@Nonnull Material material, @Nonnull String name, double emcValue, double emcValueLarge) {
+    public static ItemStack getItemLearnedIcon(@Nonnull Material material,
+                                               @Nonnull String name,
+                                               double emcValue,
+                                               double emcValueLarge
+    ) {
         return new CustomItemStack(
             material,
             Theme.SUCCESS + StringUtils.toTitleCase(name),
@@ -62,7 +66,11 @@ public final class GuiElements {
     }
 
     @ParametersAreNonnullByDefault
-    public static ItemStack getItemLearnedIcon(@Nonnull ItemStack itemStack, @Nonnull String name, double emcValue, double emcValueLarge) {
+    public static ItemStack getItemLearnedIcon(@Nonnull ItemStack itemStack,
+                                               @Nonnull String name,
+                                               double emcValue,
+                                               double emcValueLarge
+    ) {
         return new CustomItemStack(
             itemStack,
             Theme.SUCCESS + name,

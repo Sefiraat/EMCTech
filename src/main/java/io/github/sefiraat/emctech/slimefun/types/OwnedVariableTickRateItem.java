@@ -30,12 +30,23 @@ public abstract class OwnedVariableTickRateItem extends SlimefunItem {
     private final int ticksRequired;
     protected Map<Location, OwnedBlockCache> ownedBlockCacheMap = new HashMap<>();
 
-    protected OwnedVariableTickRateItem(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int ticksRequired) {
+    protected OwnedVariableTickRateItem(ItemGroup itemGroup,
+                                        SlimefunItemStack item,
+                                        RecipeType recipeType,
+                                        ItemStack[] recipe,
+                                        int ticksRequired
+    ) {
         super(itemGroup, item, recipeType, recipe);
         this.ticksRequired = ticksRequired;
     }
 
-    protected OwnedVariableTickRateItem(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, @Nullable ItemStack recipeOutput, int ticksRequired) {
+    protected OwnedVariableTickRateItem(ItemGroup itemGroup,
+                                        SlimefunItemStack item,
+                                        RecipeType recipeType,
+                                        ItemStack[] recipe,
+                                        @Nullable ItemStack recipeOutput,
+                                        int ticksRequired
+    ) {
         super(itemGroup, item, recipeType, recipe, recipeOutput);
         this.ticksRequired = ticksRequired;
     }
@@ -46,9 +57,16 @@ public abstract class OwnedVariableTickRateItem extends SlimefunItem {
             new BlockPlaceHandler(false) {
                 @Override
                 public void onPlayerPlace(@Nonnull BlockPlaceEvent event) {
-                    ownedBlockCacheMap.put(event.getBlock().getLocation(), new OwnedBlockCache(event.getPlayer(), ticksRequired));
+                    ownedBlockCacheMap.put(
+                        event.getBlock().getLocation(),
+                        new OwnedBlockCache(event.getPlayer(), ticksRequired)
+                    );
                     final BlockMenu blockMenu = BlockStorage.getInventory(event.getBlock());
-                    BlockStorage.addBlockInfo(blockMenu.getBlock(), "owner", event.getPlayer().getUniqueId().toString());
+                    BlockStorage.addBlockInfo(
+                        blockMenu.getBlock(),
+                        "owner",
+                        event.getPlayer().getUniqueId().toString()
+                    );
                     whenPlaced(event);
                 }
             },
@@ -122,7 +140,11 @@ public abstract class OwnedVariableTickRateItem extends SlimefunItem {
      * @param item
      * @param data
      */
-    protected void onValidTick(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onValidTick(@Nonnull BlockMenu blockMenu,
+                               @Nonnull Block block,
+                               @Nonnull SlimefunItem item,
+                               @Nonnull Config data
+    ) {
 
     }
 
@@ -134,7 +156,11 @@ public abstract class OwnedVariableTickRateItem extends SlimefunItem {
      * @param item
      * @param data
      */
-    protected void onEachTickFirst(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onEachTickFirst(@Nonnull BlockMenu blockMenu,
+                                   @Nonnull Block block,
+                                   @Nonnull SlimefunItem item,
+                                   @Nonnull Config data
+    ) {
 
     }
 
@@ -146,7 +172,11 @@ public abstract class OwnedVariableTickRateItem extends SlimefunItem {
      * @param item
      * @param data
      */
-    protected void onEachTickLast(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onEachTickLast(@Nonnull BlockMenu blockMenu,
+                                  @Nonnull Block block,
+                                  @Nonnull SlimefunItem item,
+                                  @Nonnull Config data
+    ) {
 
     }
 

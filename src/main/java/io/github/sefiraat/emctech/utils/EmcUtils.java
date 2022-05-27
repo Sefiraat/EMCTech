@@ -1,7 +1,7 @@
 package io.github.sefiraat.emctech.utils;
 
 import io.github.sefiraat.emctech.EmcTech;
-import io.github.sefiraat.emctech.emc.EmcGenerator;
+import io.github.sefiraat.emctech.emc.EmcCalculator;
 import io.github.sefiraat.emctech.managers.SupportedPluginManager;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -61,52 +61,52 @@ public final class EmcUtils {
         final SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
 
         if (slimefunItem == null) {
-            return EmcGenerator.getVanillaEmcValuesFiltered().getOrDefault(itemStack.getType().name(), 0.00);
+            return EmcCalculator.getVanillaEmcValuesFiltered().getOrDefault(itemStack.getType().name(), 0.00);
         } else {
-            return EmcGenerator.getSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
+            return EmcCalculator.getSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
         }
     }
 
     public static double getEmcValue(@Nonnull String string) {
-        return EmcGenerator.getVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
+        return EmcCalculator.getVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
     }
 
     public static double getEmcValue(@Nonnull String string, boolean vanilla) {
         if (vanilla) {
-            return EmcGenerator.getVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
+            return EmcCalculator.getVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
         } else {
-            return EmcGenerator.getSlimefunEmcValuesFiltered().getOrDefault(string, 0.00);
+            return EmcCalculator.getSlimefunEmcValuesFiltered().getOrDefault(string, 0.00);
         }
     }
 
     public static double getEmcValue(@Nonnull SlimefunItem slimefunItem) {
-        return EmcGenerator.getSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
+        return EmcCalculator.getSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
     }
 
     public static double getEmcValueMultiplied(@Nonnull ItemStack itemStack) {
         final SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
 
         if (slimefunItem == null) {
-            return EmcGenerator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(itemStack.getType().name(), 0.00);
+            return EmcCalculator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(itemStack.getType().name(), 0.00);
         } else {
-            return EmcGenerator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
+            return EmcCalculator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
         }
     }
 
     public static double getEmcValueMultiplied(@Nonnull String string) {
-        return EmcGenerator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
+        return EmcCalculator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
     }
 
     public static double getEmcValueMultiplied(@Nonnull String string, boolean vanilla) {
         if (vanilla) {
-            return EmcGenerator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
+            return EmcCalculator.getMultipliedVanillaEmcValuesFiltered().getOrDefault(string, 0.00);
         } else {
-            return EmcGenerator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(string, 0.00);
+            return EmcCalculator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(string, 0.00);
         }
     }
 
     public static double getEmcValueMultiplied(@Nonnull SlimefunItem slimefunItem) {
-        return EmcGenerator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
+        return EmcCalculator.getMultipliedSlimefunEmcValuesFiltered().getOrDefault(slimefunItem.getId(), 0.00);
     }
 
     public static void addValidRecipeType(@Nonnull RecipeType recipeType) {

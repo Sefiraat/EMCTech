@@ -45,18 +45,35 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
 
     private final int capacity;
 
-    public NodeMaterializer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int ticksRequired, int capacity) {
+    public NodeMaterializer(ItemGroup itemGroup,
+                            SlimefunItemStack item,
+                            RecipeType recipeType,
+                            ItemStack[] recipe,
+                            int ticksRequired,
+                            int capacity
+    ) {
         super(itemGroup, item, recipeType, recipe, ticksRequired, NodeType.CRAFTER);
         this.capacity = capacity;
     }
 
-    public NodeMaterializer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, @Nullable ItemStack recipeOutput, int ticksRequired, int capacity) {
+    public NodeMaterializer(ItemGroup itemGroup,
+                            SlimefunItemStack item,
+                            RecipeType recipeType,
+                            ItemStack[] recipe,
+                            @Nullable ItemStack recipeOutput,
+                            int ticksRequired,
+                            int capacity
+    ) {
         super(itemGroup, item, recipeType, recipe, recipeOutput, ticksRequired, NodeType.CRAFTER);
         this.capacity = capacity;
     }
 
     @Override
-    protected void onEachTickFirst(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onEachTickFirst(@Nonnull BlockMenu blockMenu,
+                                   @Nonnull Block block,
+                                   @Nonnull SlimefunItem item,
+                                   @Nonnull Config data
+    ) {
         final ItemStack itemStack = blockMenu.getItemInSlot(TEMPLATE_SLOT);
 
         if (itemStack == null || itemStack.getType() == Material.AIR) {
@@ -77,7 +94,7 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
 
     @Override
     public int[] getOutputSlots() {
-        return new int[] {OUTPUT_SLOT};
+        return new int[]{OUTPUT_SLOT};
     }
 
     @Override
@@ -86,7 +103,11 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
     }
 
     @Override
-    protected void onValidTick(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onValidTick(@Nonnull BlockMenu blockMenu,
+                               @Nonnull Block block,
+                               @Nonnull SlimefunItem item,
+                               @Nonnull Config data
+    ) {
         final ItemStack templateItemStack = blockMenu.getItemInSlot(TEMPLATE_SLOT);
 
         if (templateItemStack == null || templateItemStack.getType() == Material.AIR) {
@@ -96,7 +117,9 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
         if (EmcUtils.canEmc(templateItemStack)) {
             // Item can be EMC'd
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(templateItemStack);
-            final double emcValue = slimefunItem == null ? EmcUtils.getEmcValueMultiplied(templateItemStack) : EmcUtils.getEmcValueMultiplied(slimefunItem);
+            final double emcValue = slimefunItem == null ?
+                                    EmcUtils.getEmcValueMultiplied(templateItemStack) :
+                                    EmcUtils.getEmcValueMultiplied(slimefunItem);
 
             if (emcValue == 0) {
                 return;
@@ -105,8 +128,17 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
             final int requiredPower = Math.max(Math.min((int) emcValue, 10000000), 1);
             final Player player = getOwner(block);
 
-            if (player != null && EmcStorage.hasEnoughEmc(player, emcValue) && getCharge(block.getLocation()) >= requiredPower) {
-                if (!EmcStorage.hasLearnedItem(player, slimefunItem == null ? templateItemStack.getType().name() : slimefunItem.getId(), true)) {
+            if (player != null && EmcStorage.hasEnoughEmc(
+                player,
+                emcValue
+            ) && getCharge(block.getLocation()) >= requiredPower) {
+                if (!EmcStorage.hasLearnedItem(
+                    player,
+                    slimefunItem == null ?
+                    templateItemStack.getType().name() :
+                    slimefunItem.getId(),
+                    true
+                )) {
                     return;
                 }
 
@@ -151,7 +183,8 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
 
             @Override
             public boolean canOpen(@Nonnull Block block, @Nonnull Player player) {
-                return Slimefun.getProtectionManager().hasPermission(player, block.getLocation(), Interaction.INTERACT_BLOCK);
+                return Slimefun.getProtectionManager()
+                               .hasPermission(player, block.getLocation(), Interaction.INTERACT_BLOCK);
             }
 
             @Override

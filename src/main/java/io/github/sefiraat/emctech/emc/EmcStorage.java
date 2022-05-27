@@ -22,7 +22,12 @@ public final class EmcStorage {
 
     @ParametersAreNonnullByDefault
     public static void learnItem(@Nonnull UUID player, @Nonnull String itemName, boolean vanilla) {
-        final String path = MessageFormat.format("{0}.{1}.{2}.UNLOCKED", player, vanilla ? "VANILLA" : "SLIMEFUN", itemName);
+        final String path = MessageFormat.format(
+            "{0}.{1}.{2}.UNLOCKED",
+            player,
+            vanilla ? "VANILLA" : "SLIMEFUN",
+            itemName
+        );
         ConfigManager.getPlayerLearnedItems().getFileData().insert(path, true);
     }
 
@@ -33,7 +38,12 @@ public final class EmcStorage {
 
     @ParametersAreNonnullByDefault
     public static boolean hasLearnedItem(@Nonnull UUID player, @Nonnull String itemName, boolean vanilla) {
-        final String path = MessageFormat.format("{0}.{1}.{2}.UNLOCKED", player, vanilla ? "VANILLA" : "SLIMEFUN", itemName);
+        final String path = MessageFormat.format(
+            "{0}.{1}.{2}.UNLOCKED",
+            player,
+            vanilla ? "VANILLA" : "SLIMEFUN",
+            itemName
+        );
         return ConfigManager.getPlayerLearnedItems().getBoolean(path);
     }
 

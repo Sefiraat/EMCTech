@@ -86,7 +86,11 @@ public class EmcStacks {
 
         TIGHTLY_PACKED_UNORTHODOX_COAL = Theme.themedSlimefunItemStack(
             "ETC_TIGHTLY_PACKED_UNORTHODOX_COAL",
-            ItemStackGenerators.createEnchantedItemStack(Material.POLISHED_BLACKSTONE_BUTTON, true, new Pair<>(Enchantment.LURE, 1)),
+            ItemStackGenerators.createEnchantedItemStack(
+                Material.POLISHED_BLACKSTONE_BUTTON,
+                true,
+                new Pair<>(Enchantment.LURE, 1)
+            ),
             Theme.CRAFTING,
             "Unorthodox Coal Dust (Packed)",
             "Unorthodox Coal packed into a tight form."
@@ -120,7 +124,11 @@ public class EmcStacks {
 
         TIGHTLY_PACKED_DEVIANT_COAL = Theme.themedSlimefunItemStack(
             "ETC_TIGHTLY_PACKED_DEVIANT_COAL",
-            ItemStackGenerators.createEnchantedItemStack(Material.POLISHED_BLACKSTONE_BUTTON, true, new Pair<>(Enchantment.LURE, 1)),
+            ItemStackGenerators.createEnchantedItemStack(
+                Material.POLISHED_BLACKSTONE_BUTTON,
+                true,
+                new Pair<>(Enchantment.LURE, 1)
+            ),
             Theme.CRAFTING,
             "Deviant Coal Dust (Packed)",
             "Deviant Coal packed into a tight form."
@@ -154,7 +162,11 @@ public class EmcStacks {
 
         TIGHTLY_PACKED_DIVERGENT_COAL = Theme.themedSlimefunItemStack(
             "ETC_TIGHTLY_PACKED_DIVERGENT_COAL",
-            ItemStackGenerators.createEnchantedItemStack(Material.POLISHED_BLACKSTONE_BUTTON, true, new Pair<>(Enchantment.LURE, 1)),
+            ItemStackGenerators.createEnchantedItemStack(
+                Material.POLISHED_BLACKSTONE_BUTTON,
+                true,
+                new Pair<>(Enchantment.LURE, 1)
+            ),
             Theme.CRAFTING,
             "Divergent Coal Dust (Packed)",
             "Divergent Coal packed into a tight form."
@@ -188,7 +200,11 @@ public class EmcStacks {
 
         TIGHTLY_PACKED_ANOMALOUS_COAL = Theme.themedSlimefunItemStack(
             "ETC_TIGHTLY_PACKED_ANOMALOUS_COAL",
-            ItemStackGenerators.createEnchantedItemStack(Material.POLISHED_BLACKSTONE_BUTTON, true, new Pair<>(Enchantment.LURE, 1)),
+            ItemStackGenerators.createEnchantedItemStack(
+                Material.POLISHED_BLACKSTONE_BUTTON,
+                true,
+                new Pair<>(Enchantment.LURE, 1)
+            ),
             Theme.CRAFTING,
             "Anomalous Coal Dust (Packed)",
             "Anomalous Coal packed into a tight form."

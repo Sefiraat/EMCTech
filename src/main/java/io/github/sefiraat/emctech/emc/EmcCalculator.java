@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class EmcGenerator {
+public final class EmcCalculator {
 
     private static final double MULTIPLIER = 1.1;
 
@@ -30,7 +30,7 @@ public final class EmcGenerator {
     private static final Map<String, Double> VANILLA_EMC_VALUES_MULTIPLIED = new HashMap<>();
     private static final Map<String, Double> SLIMEFUN_EMC_VALUES_MULTIPLIED = new HashMap<>();
 
-    private EmcGenerator() {
+    private EmcCalculator() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -59,7 +59,10 @@ public final class EmcGenerator {
 
                 if (multiValue != null) {
                     // This item is in the config file, we can skip it
-                    sendDebugMessage(0, "This item has already been added either via config or a previous item's calculations: " + multiValue);
+                    sendDebugMessage(
+                        0,
+                        "This item has already been added either via config or a previous item's calculations: " + multiValue
+                    );
                 } else {
                     sendDebugMessage(0, "Calculating Multiplied Value.");
                     getItemValueVanilla(itemStack, new ArrayList<>(), 1, true);
@@ -67,7 +70,10 @@ public final class EmcGenerator {
 
                 if (smallValue != null) {
                     // This item is in the config file, we can skip it
-                    sendDebugMessage(0, "This item has already been added either via config or a previous item's calculations: " + smallValue);
+                    sendDebugMessage(
+                        0,
+                        "This item has already been added either via config or a previous item's calculations: " + smallValue
+                    );
                 } else {
                     sendDebugMessage(0, "Calculating Multiplied Value.");
                     getItemValueVanilla(itemStack, new ArrayList<>(), 1, false);
@@ -76,9 +82,15 @@ public final class EmcGenerator {
         }
     }
 
-    private static double getItemValueVanilla(@Nonnull ItemStack itemStack, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
+    private static double getItemValueVanilla(@Nonnull ItemStack itemStack,
+                                              @Nonnull List<String> history,
+                                              int nestingLevel,
+                                              boolean multiplier
+    ) {
         sendDebugMessage(nestingLevel, "Processing: " + itemStack.getType().name());
-        final Double storedValue = multiplier ? VANILLA_EMC_VALUES_MULTIPLIED.get(itemStack.getType().name()) : VANILLA_EMC_VALUES.get(itemStack.getType().name());
+        final Double storedValue = multiplier ?
+                                   VANILLA_EMC_VALUES_MULTIPLIED.get(itemStack.getType().name()) :
+                                   VANILLA_EMC_VALUES.get(itemStack.getType().name());
 
         if (storedValue != null) {
             // This item has previously been evaluated or is base, so we can return it
@@ -99,7 +111,10 @@ public final class EmcGenerator {
         final List<Recipe> recipeList = Bukkit.getRecipesFor(itemStack);
 
         if (recipeList.isEmpty()) {
-            sendDebugMessage(nestingLevel, "There are no recipes and this item is not in the EMC base so it cannot be EMC'd.");
+            sendDebugMessage(
+                nestingLevel,
+                "There are no recipes and this item is not in the EMC base so it cannot be EMC'd."
+            );
             return 0;
         }
 
@@ -110,10 +125,16 @@ public final class EmcGenerator {
             if (recipeValue > 0) {
                 recipeValue = Math.round(recipeValue * 100) / 100.00;
                 if (value == 0) {
-                    sendDebugMessage(nestingLevel, "Value found and is the first (perhaps only) to be recorded: " + recipeValue);
+                    sendDebugMessage(
+                        nestingLevel,
+                        "Value found and is the first (perhaps only) to be recorded: " + recipeValue
+                    );
                     value = recipeValue;
                 } else if (recipeValue < value) {
-                    sendDebugMessage(nestingLevel, "Value found and is of lesser value which will supersede any previous: " + recipeValue);
+                    sendDebugMessage(
+                        nestingLevel,
+                        "Value found and is of lesser value which will supersede any previous: " + recipeValue
+                    );
                     value = recipeValue;
                 }
             } else {
@@ -135,7 +156,11 @@ public final class EmcGenerator {
         return value;
     }
 
-    private static double processRecipeVanilla(@Nonnull Recipe recipe, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
+    private static double processRecipeVanilla(@Nonnull Recipe recipe,
+                                               @Nonnull List<String> history,
+                                               int nestingLevel,
+                                               boolean multiplier
+    ) {
         if (recipe instanceof ShapedRecipe shapedRecipe) {
             return processShapedRecipe(shapedRecipe, history, nestingLevel, multiplier);
         } else if (recipe instanceof ShapelessRecipe shapelessRecipe) {
@@ -151,7 +176,11 @@ public final class EmcGenerator {
         }
     }
 
-    private static double processShapedRecipe(@Nonnull ShapedRecipe shapedRecipe, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
+    private static double processShapedRecipe(@Nonnull ShapedRecipe shapedRecipe,
+                                              @Nonnull List<String> history,
+                                              int nestingLevel,
+                                              boolean multiplier
+    ) {
         double value = 0;
         final Map<Character, Double> valueMap = new HashMap<>();
         for (Map.Entry<Character, ItemStack> entry : shapedRecipe.getIngredientMap().entrySet()) {
@@ -174,10 +203,20 @@ public final class EmcGenerator {
                 }
             }
         }
-        return (value * (multiplier ? MULTIPLIER : 1)) / shapedRecipe.getResult().getAmount();
+        // Multiply if required
+        if (multiplier) {
+            value *= MULTIPLIER;
+        }
+        // Divide by the number of resulting items
+        value /= shapedRecipe.getResult().getAmount();
+        return value;
     }
 
-    private static double processShapelessRecipe(@Nonnull ShapelessRecipe shapelessRecipe, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
+    private static double processShapelessRecipe(@Nonnull ShapelessRecipe shapelessRecipe,
+                                                 @Nonnull List<String> history,
+                                                 int nestingLevel,
+                                                 boolean multiplier
+    ) {
         double value = 0;
         for (ItemStack itemStack : shapelessRecipe.getIngredientList()) {
             double itemValue = getItemValueVanilla(itemStack, history, nestingLevel + 1, multiplier);
@@ -187,21 +226,88 @@ public final class EmcGenerator {
             }
             value += itemValue;
         }
-        return (value * (multiplier ? MULTIPLIER : 1)) / shapelessRecipe.getResult().getAmount();
+
+        // Multiply if required
+        if (multiplier) {
+            value *= MULTIPLIER;
+        }
+        // Divide by the number of resulting items
+        value /= shapelessRecipe.getResult().getAmount();
+        return value;
     }
 
-    private static double processCookingRecipe(@Nonnull CookingRecipe<?> cookingRecipe, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
-        return (getItemValueVanilla(cookingRecipe.getInput(), history, nestingLevel + 1, multiplier) * (multiplier ? MULTIPLIER : 1)) / cookingRecipe.getResult().getAmount();
+    private static double processCookingRecipe(@Nonnull CookingRecipe<?> cookingRecipe,
+                                               @Nonnull List<String> history,
+                                               int nestingLevel,
+                                               boolean multiplier
+    ) {
+        // Get base value
+        double value = getItemValueVanilla(
+            cookingRecipe.getInput(),
+            history,
+            nestingLevel + 1,
+            multiplier
+        );
+
+        // Multiply if required
+        if (multiplier) {
+            value *= MULTIPLIER;
+        }
+        // Divide by the number of resulting items
+        value /= cookingRecipe.getResult().getAmount();
+        return value;
     }
 
-    private static double processSmithingRecipe(@Nonnull SmithingRecipe smithingRecipe, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
-        double baseValue = getItemValueVanilla(smithingRecipe.getBase().getItemStack(), history, nestingLevel + 1, multiplier) * (multiplier ? MULTIPLIER : 1);
-        double additionValue = getItemValueVanilla(smithingRecipe.getAddition().getItemStack(), history, nestingLevel + 1, multiplier) * (multiplier ? MULTIPLIER : 1);
-        return (baseValue + additionValue) / smithingRecipe.getResult().getAmount();
+    private static double processSmithingRecipe(@Nonnull SmithingRecipe smithingRecipe,
+                                                @Nonnull List<String> history,
+                                                int nestingLevel,
+                                                boolean multiplier
+    ) {
+        // Get base value
+        double baseValue = getItemValueVanilla(
+            smithingRecipe.getBase().getItemStack(),
+            history,
+            nestingLevel + 1,
+            multiplier
+        );
+        // Get addition value
+        double additionValue = getItemValueVanilla(
+            smithingRecipe.getAddition().getItemStack(),
+            history,
+            nestingLevel + 1,
+            multiplier
+        );
+
+        // Multiply if required
+        if (multiplier) {
+            baseValue *= MULTIPLIER;
+            additionValue *= MULTIPLIER;
+        }
+        // Divide by the number of resulting items
+        double value = baseValue + additionValue;
+        value /= smithingRecipe.getResult().getAmount();
+        return value;
     }
 
-    private static double processStonecuttingRecipe(@Nonnull StonecuttingRecipe stonecuttingRecipe, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
-        return (getItemValueVanilla(stonecuttingRecipe.getInput(), history, nestingLevel + 1, multiplier) * (multiplier ? MULTIPLIER : 1)) / stonecuttingRecipe.getResult().getAmount();
+    private static double processStonecuttingRecipe(@Nonnull StonecuttingRecipe stonecuttingRecipe,
+                                                    @Nonnull List<String> history,
+                                                    int nestingLevel,
+                                                    boolean multiplier
+    ) {
+        double value = getItemValueVanilla(
+            stonecuttingRecipe.getInput(),
+            history,
+            nestingLevel + 1,
+            multiplier
+        );
+
+        // Multiply if required
+        if (multiplier) {
+            value *= MULTIPLIER;
+        }
+        // Divine by the number of resulting items
+        value /= stonecuttingRecipe.getResult().getAmount();
+        return value;
     }
 
     private static void setupSlimefun() {
@@ -214,7 +320,10 @@ public final class EmcGenerator {
 
             if (multiValue != null) {
                 // This item is in the config file, we can skip it
-                sendDebugMessage(0, "This item has already been added either via config or a previous item's calculations.");
+                sendDebugMessage(
+                    0,
+                    "This item has already been added either via config or a previous item's calculations."
+                );
             } else {
                 sendDebugMessage(0, "Calculating Multiplied Value.");
                 getItemValueSlimefun(item, new ArrayList<>(), 1, true);
@@ -223,7 +332,10 @@ public final class EmcGenerator {
 
             if (smallValue != null) {
                 // This item is in the config file, we can skip it
-                sendDebugMessage(0, "This item has already been added either via config or a previous item's calculations.");
+                sendDebugMessage(
+                    0,
+                    "This item has already been added either via config or a previous item's calculations."
+                );
             } else {
                 sendDebugMessage(0, "Calculating Basic Value.");
                 getItemValueSlimefun(item, new ArrayList<>(), 1, false);
@@ -232,8 +344,14 @@ public final class EmcGenerator {
         }
     }
 
-    private static double getItemValueSlimefun(@Nonnull SlimefunItem slimefunItem, @Nonnull List<String> history, int nestingLevel, boolean multiplier) {
-        final Double storedValue = multiplier ? SLIMEFUN_EMC_VALUES_MULTIPLIED.get(slimefunItem.getId()) : SLIMEFUN_EMC_VALUES.get(slimefunItem.getId());
+    private static double getItemValueSlimefun(@Nonnull SlimefunItem slimefunItem,
+                                               @Nonnull List<String> history,
+                                               int nestingLevel,
+                                               boolean multiplier
+    ) {
+        final Double storedValue = multiplier ?
+                                   SLIMEFUN_EMC_VALUES_MULTIPLIED.get(slimefunItem.getId()) :
+                                   SLIMEFUN_EMC_VALUES.get(slimefunItem.getId());
         sendDebugMessage(0, "Processing: " + slimefunItem.getId());
 
         if (storedValue != null) {
@@ -270,10 +388,19 @@ public final class EmcGenerator {
         history.add(id);
 
         sendDebugMessage(nestingLevel, "Found a recipe");
-        double recipeValue = processRecipeSlimefun(slimefunItem.getRecipe(), slimefunItem.getRecipeOutput().getAmount(), history, nestingLevel + 1, multiplier);
+        double recipeValue = processRecipeSlimefun(
+            slimefunItem.getRecipe(),
+            slimefunItem.getRecipeOutput().getAmount(),
+            history,
+            nestingLevel + 1,
+            multiplier
+        );
         if (recipeValue > 0) {
             recipeValue = Math.round(recipeValue * 100) / 100.00;
-            sendDebugMessage(nestingLevel, "Value found and is of lesser value which will supersede any previous: " + recipeValue);
+            sendDebugMessage(
+                nestingLevel,
+                "Value found and is of lesser value which will supersede any previous: " + recipeValue
+            );
             value = recipeValue;
         } else {
             sendDebugMessage(nestingLevel, "Recipe resulted in 0 EMC meaning it's invalid.");
@@ -293,7 +420,12 @@ public final class EmcGenerator {
         return value;
     }
 
-    private static double processRecipeSlimefun(@Nonnull ItemStack[] recipe, int outputAmount, List<String> history, int nestingLevel, boolean multiplier) {
+    private static double processRecipeSlimefun(@Nonnull ItemStack[] recipe,
+                                                int outputAmount,
+                                                List<String> history,
+                                                int nestingLevel,
+                                                boolean multiplier
+    ) {
         double value = 0;
         for (ItemStack itemStack : recipe) {
             if (itemStack == null) {
@@ -308,7 +440,12 @@ public final class EmcGenerator {
                 itemValue = EmcUtils.getEmcValue(itemStack) * itemStack.getAmount();
             } else {
                 sendDebugMessage(nestingLevel, "Processing slimefun recipe item: " + slimefunItem.getId());
-                itemValue = getItemValueSlimefun(slimefunItem, history, nestingLevel + 1, multiplier) * itemStack.getAmount();
+                itemValue = getItemValueSlimefun(
+                    slimefunItem,
+                    history,
+                    nestingLevel + 1,
+                    multiplier
+                ) * itemStack.getAmount();
             }
             if (itemValue == 0) {
                 return 0;
@@ -360,7 +497,7 @@ public final class EmcGenerator {
         if (ConfigManager.getInstance().debuggingMessages()) {
             final StringBuilder stringBuilder = new StringBuilder();
 
-            stringBuilder.append(" ".repeat(nestingLevel));
+            stringBuilder.append("  ".repeat(nestingLevel));
             for (String string : strings) {
                 stringBuilder.append(string);
             }

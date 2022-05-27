@@ -3,7 +3,7 @@ package io.github.sefiraat.emctech;
 
 import co.aikar.commands.PaperCommandManager;
 import io.github.sefiraat.emctech.commands.EmcTechMain;
-import io.github.sefiraat.emctech.emc.EmcGenerator;
+import io.github.sefiraat.emctech.emc.EmcCalculator;
 import io.github.sefiraat.emctech.managers.ConfigManager;
 import io.github.sefiraat.emctech.managers.ListenerManager;
 import io.github.sefiraat.emctech.managers.RunnableManager;
@@ -56,7 +56,7 @@ public class EmcTech extends JavaPlugin implements SlimefunAddon {
         commandManager.registerCommand(new EmcTechMain());
 
         EmcItems.setup();
-        EmcGenerator.setup();
+        EmcCalculator.setup();
     }
 
     @Override

@@ -45,18 +45,35 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
 
     private final int capacity;
 
-    public Dematerializer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, int ticksRequired, int capacity) {
+    public Dematerializer(ItemGroup itemGroup,
+                          SlimefunItemStack item,
+                          RecipeType recipeType,
+                          ItemStack[] recipe,
+                          int ticksRequired,
+                          int capacity
+    ) {
         super(itemGroup, item, recipeType, recipe, ticksRequired);
         this.capacity = capacity;
     }
 
-    public Dematerializer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, @Nullable ItemStack recipeOutput, int ticksRequired, int capacity) {
+    public Dematerializer(ItemGroup itemGroup,
+                          SlimefunItemStack item,
+                          RecipeType recipeType,
+                          ItemStack[] recipe,
+                          @Nullable ItemStack recipeOutput,
+                          int ticksRequired,
+                          int capacity
+    ) {
         super(itemGroup, item, recipeType, recipe, recipeOutput, ticksRequired);
         this.capacity = capacity;
     }
 
     @Override
-    protected void onEachTickFirst(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onEachTickFirst(@Nonnull BlockMenu blockMenu,
+                                   @Nonnull Block block,
+                                   @Nonnull SlimefunItem item,
+                                   @Nonnull Config data
+    ) {
         final ItemStack itemStack = blockMenu.getItemInSlot(TEMPLATE_SLOT);
 
         if (itemStack == null || itemStack.getType() == Material.AIR) {
@@ -85,7 +102,11 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
     }
 
     @Override
-    protected void onValidTick(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull SlimefunItem item, @Nonnull Config data) {
+    protected void onValidTick(@Nonnull BlockMenu blockMenu,
+                               @Nonnull Block block,
+                               @Nonnull SlimefunItem item,
+                               @Nonnull Config data
+    ) {
         final ItemStack templateItemStack = blockMenu.getItemInSlot(TEMPLATE_SLOT);
         final ItemStack inputItemStack = blockMenu.getItemInSlot(INPUT_SLOT);
 
@@ -100,7 +121,9 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
         if (EmcUtils.canEmc(inputItemStack) && SlimefunUtils.isItemSimilar(inputItemStack, templateItemStack, true)) {
             // Item can be EMC'd and matches the given template item
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(inputItemStack);
-            final double emcValue = slimefunItem == null ? EmcUtils.getEmcValue(inputItemStack) : EmcUtils.getEmcValue(slimefunItem);
+            final double emcValue = slimefunItem == null ?
+                                    EmcUtils.getEmcValue(inputItemStack) :
+                                    EmcUtils.getEmcValue(slimefunItem);
 
             if (emcValue == 0) {
                 return;
@@ -154,7 +177,8 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
 
             @Override
             public boolean canOpen(@Nonnull Block block, @Nonnull Player player) {
-                return Slimefun.getProtectionManager().hasPermission(player, block.getLocation(), Interaction.INTERACT_BLOCK);
+                return Slimefun.getProtectionManager()
+                               .hasPermission(player, block.getLocation(), Interaction.INTERACT_BLOCK);
             }
 
             @Override

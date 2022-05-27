@@ -34,7 +34,9 @@ public class ConfigManager {
         this.playerEmc = new Json("player_emc.yml", "plugins/EMCTech");
         this.playerLearnedItems = new Json("learned_items.yml", "plugins/EMCTech");
 
-        final ConfigurationSection section = EmcTech.getInstance().getConfig().getConfigurationSection("blacklisted-addons");
+        final ConfigurationSection section = EmcTech.getInstance()
+                                                    .getConfig()
+                                                    .getConfigurationSection("blacklisted-addons");
         for (String key : section.getKeys(false)) {
             if (section.getBoolean(key)) {
                 blacklistedAddons.add(key);
@@ -92,7 +94,9 @@ public class ConfigManager {
     }
 
     public Map<String, Double> getEmcValuesVanilla() {
-        final ConfigurationSection section = EmcTech.getInstance().getConfig().getConfigurationSection("emc-values.vanilla");
+        final ConfigurationSection section = EmcTech.getInstance()
+                                                    .getConfig()
+                                                    .getConfigurationSection("emc-values.vanilla");
         if (section == null) {
             EmcTech.getInstance().getLogger().severe("The EMC Base values config for Vanilla cannot be found.");
             return Collections.emptyMap();
@@ -101,7 +105,9 @@ public class ConfigManager {
     }
 
     public Map<String, Double> getEmcValuesSlimefun() {
-        final ConfigurationSection section = EmcTech.getInstance().getConfig().getConfigurationSection("emc-values.slimefun");
+        final ConfigurationSection section = EmcTech.getInstance()
+                                                    .getConfig()
+                                                    .getConfigurationSection("emc-values.slimefun");
         if (section == null) {
             EmcTech.getInstance().getLogger().severe("The EMC Base values config for Slimefun cannot be found.");
             return Collections.emptyMap();

@@ -41,6 +41,7 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
     };
 
     private static final int TEMPLATE_SLOT = 13;
+    private static final int INFO_SLOT = 22;
     private static final int OUTPUT_SLOT = 31;
 
     private final int capacity;
@@ -111,38 +112,52 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
         final ItemStack templateItemStack = blockMenu.getItemInSlot(TEMPLATE_SLOT);
 
         if (templateItemStack == null || templateItemStack.getType() == Material.AIR) {
+            setNotWorking(blockMenu);
             return;
         }
 
         if (EmcUtils.canEmc(templateItemStack)) {
             // Item can be EMC'd
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(templateItemStack);
-            final double emcValue = slimefunItem == null ?
-                                    EmcUtils.getEmcValueMultiplied(templateItemStack) :
-                                    EmcUtils.getEmcValueMultiplied(slimefunItem);
+            final Player player = getOwner(block);
+            String name;
+            double emcValue;
+
+            if (player == null) {
+                setInvalidPlayer(blockMenu);
+                return;
+            }
+
+            if (slimefunItem == null) {
+                name = templateItemStack.getType().name();
+                emcValue = EmcUtils.getEmcValue(templateItemStack);
+            } else {
+                name = slimefunItem.getId();
+                emcValue = EmcUtils.getEmcValue(slimefunItem);
+            }
 
             if (emcValue == 0) {
+                setInvalidItem(blockMenu);
+                return;
+            }
+
+            if (!EmcStorage.hasLearnedItem(player,
+                                           slimefunItem == null ?
+                                           templateItemStack.getType().name() :
+                                           slimefunItem.getId(),
+                                           slimefunItem == null
+            )) {
+                setUnlearnedItem(blockMenu);
                 return;
             }
 
             final int requiredPower = Math.max(Math.min((int) emcValue, 10000000), 1);
-            final Player player = getOwner(block);
+            final int currentCharge = getCharge(block.getLocation());
 
-            if (player != null && EmcStorage.hasEnoughEmc(
-                player,
-                emcValue
-            ) && getCharge(block.getLocation()) >= requiredPower) {
-                if (!EmcStorage.hasLearnedItem(
-                    player,
-                    slimefunItem == null ?
-                    templateItemStack.getType().name() :
-                    slimefunItem.getId(),
-                    true
-                )) {
-                    return;
-                }
-
+            setWorking(blockMenu, name, emcValue, requiredPower, currentCharge);
+            if (EmcStorage.hasEnoughEmc(player, emcValue) && currentCharge >= requiredPower) {
                 final ItemStack newItemStack = templateItemStack.clone();
+
                 newItemStack.setAmount(1);
                 if (blockMenu.fits(newItemStack, OUTPUT_SLOT)) {
                     removeCharge(block.getLocation(), requiredPower);
@@ -151,6 +166,34 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
                 }
             }
         }
+    }
+
+    private void setNotWorking(@Nonnull BlockMenu blockMenu) {
+        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_NOT_WORKING);
+    }
+
+    private void setInvalidItem(@Nonnull BlockMenu blockMenu) {
+        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_INVALID_ITEM);
+    }
+
+    private void setInvalidPlayer(@Nonnull BlockMenu blockMenu) {
+        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_INVALID_PLAYER);
+    }
+
+    private void setUnlearnedItem(@Nonnull BlockMenu blockMenu) {
+        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_UNLEARNED_ITEM);
+    }
+
+    private void setWorking(@Nonnull BlockMenu blockMenu,
+                            @Nonnull String name,
+                            double emcValue,
+                            int requiredPower,
+                            int currentPower
+    ) {
+        blockMenu.replaceExistingItem(
+            INFO_SLOT,
+            GuiElements.getWorkingOnIcon(name, emcValue, requiredPower, currentPower)
+        );
     }
 
     protected void reject(@Nonnull BlockMenu blockMenu, @Nonnull ItemStack itemStack) {

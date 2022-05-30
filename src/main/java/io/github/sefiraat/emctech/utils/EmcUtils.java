@@ -8,9 +8,10 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public final class EmcUtils {
 
@@ -18,11 +19,16 @@ public final class EmcUtils {
         throw new IllegalStateException("Utility class");
     }
 
-    public static final DecimalFormat EMC_FORMAT = new DecimalFormat("#,###.00");
+    public static final NumberFormat EMC_FORMAT;
 
     public static final List<RecipeType> ALLOWABLE_RECIPE_TYPES = new ArrayList<>();
 
     static {
+
+        EMC_FORMAT = NumberFormat.getCompactNumberInstance(Locale.ROOT, NumberFormat.Style.SHORT);
+        EMC_FORMAT.setMinimumFractionDigits(2);
+        EMC_FORMAT.setMaximumFractionDigits(2);
+
         ALLOWABLE_RECIPE_TYPES.add(RecipeType.ENHANCED_CRAFTING_TABLE);
         ALLOWABLE_RECIPE_TYPES.add(RecipeType.SMELTERY);
         ALLOWABLE_RECIPE_TYPES.add(RecipeType.GOLD_PAN);

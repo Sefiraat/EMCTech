@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 public class Dematerializer extends OwnedVariableTickRateItem implements EnergyNetComponent {
 
     private static final int[] BACKGROUND_SLOTS = new int[]{
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44
     };
 
     private static final int[] TEMPLATE_BACKGROUND = new int[]{
@@ -41,6 +41,7 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
     };
 
     private static final int TEMPLATE_SLOT = 13;
+    private static final int INFO_SLOT = 22;
     private static final int INPUT_SLOT = 31;
 
     private final int capacity;
@@ -110,50 +111,75 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
         final ItemStack templateItemStack = blockMenu.getItemInSlot(TEMPLATE_SLOT);
         final ItemStack inputItemStack = blockMenu.getItemInSlot(INPUT_SLOT);
 
-        if (templateItemStack == null || templateItemStack.getType() == Material.AIR) {
-            return;
-        }
-
-        if (inputItemStack == null || inputItemStack.getType() == Material.AIR) {
+        if (templateItemStack == null
+            || templateItemStack.getType() == Material.AIR
+            || inputItemStack == null
+            || inputItemStack.getType() == Material.AIR
+        ) {
+            setNotWorking(blockMenu);
             return;
         }
 
         if (EmcUtils.canEmc(inputItemStack) && SlimefunUtils.isItemSimilar(inputItemStack, templateItemStack, true)) {
             // Item can be EMC'd and matches the given template item
             final SlimefunItem slimefunItem = SlimefunItem.getByItem(inputItemStack);
-            final double emcValue = slimefunItem == null ?
-                                    EmcUtils.getEmcValue(inputItemStack) :
-                                    EmcUtils.getEmcValue(slimefunItem);
+            String name;
+            double emcValue;
+
+            if (slimefunItem == null) {
+                name = inputItemStack.getType().name();
+                emcValue = EmcUtils.getEmcValue(inputItemStack);
+            } else {
+                name = slimefunItem.getId();
+                emcValue = EmcUtils.getEmcValue(slimefunItem);
+            }
 
             if (emcValue == 0) {
+                setInvalidItem(blockMenu);
                 return;
             }
 
-            final int requiredPower = Math.max(Math.min((int) emcValue / 10, 10000000), 1);
+            final int requiredPower = Math.max(Math.min(((int) emcValue) / 10, 10000000), 1);
             final Player player = getOwner(block);
+            final int currentCharge = getCharge(block.getLocation());
 
-            if (player != null && getCharge(block.getLocation()) >= requiredPower) {
+            setWorking(blockMenu, name, emcValue, requiredPower, currentCharge);
+            if (player != null && currentCharge >= requiredPower) {
                 removeCharge(block.getLocation(), requiredPower);
                 EmcStorage.addEmc(player, emcValue);
-                if (slimefunItem == null) {
-                    EmcStorage.learnItem(player, inputItemStack.getType().name(), true);
-                } else {
-                    EmcStorage.learnItem(player, slimefunItem.getId(), false);
-                }
+                EmcStorage.learnItem(player, name, slimefunItem == null);
                 inputItemStack.setAmount(inputItemStack.getAmount() - 1);
             }
-
         }
-
     }
 
-    protected void reject(@Nonnull BlockMenu blockMenu, @Nonnull ItemStack itemStack) {
+    private void setNotWorking(@Nonnull BlockMenu blockMenu) {
+        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_NOT_WORKING);
+    }
+
+    private void setInvalidItem(@Nonnull BlockMenu blockMenu) {
+        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_INVALID_ITEM);
+    }
+
+    private void setWorking(@Nonnull BlockMenu blockMenu,
+                            @Nonnull String name,
+                            double emcValue,
+                            int requiredPower,
+                            int currentPower
+    ) {
+        blockMenu.replaceExistingItem(
+            INFO_SLOT,
+            GuiElements.getWorkingOnIcon(name, emcValue, requiredPower, currentPower)
+        );
+    }
+
+    private void reject(@Nonnull BlockMenu blockMenu, @Nonnull ItemStack itemStack) {
         final ItemStack rejectedSpawn = itemStack.clone();
         itemStack.setAmount(0);
         blockMenu.getBlock().getWorld().dropItemNaturally(blockMenu.getLocation(), rejectedSpawn);
     }
 
-    protected void rejectOverage(@Nonnull BlockMenu blockMenu, @Nonnull ItemStack itemStack) {
+    private void rejectOverage(@Nonnull BlockMenu blockMenu, @Nonnull ItemStack itemStack) {
         final ItemStack rejectedSpawn = itemStack.clone();
         rejectedSpawn.setAmount(rejectedSpawn.getAmount() - 1);
         itemStack.setAmount(1);
@@ -167,6 +193,7 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
             @Override
             public void init() {
                 drawBackground(BACKGROUND_SLOTS);
+                addItem(INFO_SLOT, GuiElements.INFO_NOT_WORKING, ChestMenuUtils.getEmptyClickHandler());
                 for (int i : TEMPLATE_BACKGROUND) {
                     addItem(i, GuiElements.TEMPLATE_BACKGROUND, ChestMenuUtils.getEmptyClickHandler());
                 }

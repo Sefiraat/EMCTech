@@ -335,9 +335,9 @@ public class EmcStacks {
             "and put the resulting EMC into the owner's",
             "available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per 5 S/F Ticks",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "1,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value / 10"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per 5 S/F Ticks"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "1,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value / 10")
         );
 
         EMC_DEMATERIALIZER_2 = Theme.themedSlimefunItemStack(
@@ -349,9 +349,9 @@ public class EmcStacks {
             "and put the resulting EMC into the owner's",
             "available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per 4 S/F Ticks",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "10,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value / 10"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per 4 S/F Ticks"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "10,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value / 10")
         );
 
         EMC_DEMATERIALIZER_3 = Theme.themedSlimefunItemStack(
@@ -363,9 +363,9 @@ public class EmcStacks {
             "and put the resulting EMC into the owner's",
             "available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per 3 S/F Ticks",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "100,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value / 10"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per 3 S/F Ticks"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "100,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value / 10")
         );
 
         EMC_DEMATERIALIZER_4 = Theme.themedSlimefunItemStack(
@@ -377,9 +377,9 @@ public class EmcStacks {
             "and put the resulting EMC into the owner's",
             "available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per 2 S/F Ticks",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "1,000,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value / 10"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per 4 S/F Ticks"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "1,000,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value / 10")
         );
 
         EMC_DEMATERIALIZER_5 = Theme.themedSlimefunItemStack(
@@ -391,9 +391,9 @@ public class EmcStacks {
             "and put the resulting EMC into the owner's",
             "available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per S/F Tick",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "10,000,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value / 10 (Caps at capacity)"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item S/F Tick"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "10,000,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value / 10 (Caps at capacity)")
         );
 
         EMC_MATERIALIZER_1 = Theme.themedSlimefunItemStack(
@@ -404,9 +404,9 @@ public class EmcStacks {
             "This machine will slowly create items",
             "from the owner's available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per 5 S/F Ticks",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "1,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per 5 S/F Ticks"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "1,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value")
         );
 
         EMC_MATERIALIZER_2 = Theme.themedSlimefunItemStack(
@@ -417,9 +417,9 @@ public class EmcStacks {
             "This machine will slowly create items",
             "from the owner's available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per 4 S/F Ticks",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "10,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per 4 S/F Ticks"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "10,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value")
         );
 
         EMC_MATERIALIZER_3 = Theme.themedSlimefunItemStack(
@@ -430,9 +430,9 @@ public class EmcStacks {
             "This machine will slowly create items",
             "from the owner's available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per 3 S/F Ticks",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "100,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per 3 S/F Ticks"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "100,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value")
         );
 
         EMC_MATERIALIZER_4 = Theme.themedSlimefunItemStack(
@@ -443,9 +443,9 @@ public class EmcStacks {
             "This machine will slowly create items",
             "from the owner's available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per 2 S/F Ticks",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "1,000,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value / 10"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per 2 S/F Ticks"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "1,000,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value")
         );
 
         EMC_MATERIALIZER_5 = Theme.themedSlimefunItemStack(
@@ -456,9 +456,9 @@ public class EmcStacks {
             "This machine will slowly create items",
             "from the owner's available EMC pool.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per S/F Tick",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "10,000,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value / 10 (Caps at capacity)"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per S/F Tick"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "10,000,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value (Caps at capacity)")
         );
 
         EMC_NETWORK_MATERIALIZER = Theme.themedSlimefunItemStack(
@@ -470,9 +470,9 @@ public class EmcStacks {
             "from the owner's available EMC pool.",
             "Items can be seen within your Network.",
             "",
-            Theme.CLICK_INFO + "Rate: " + Theme.PASSIVE + "1 item per S/F Tick",
-            Theme.CLICK_INFO + "Power Capacity: " + Theme.PASSIVE + "10,000,000",
-            Theme.CLICK_INFO + "Power Consumption: " + Theme.PASSIVE + "Item EMC Value / 10 (Caps at capacity)"
+            Theme.CLICK_INFO.applyAsTitle("Rate", "1 item per S/F Tick"),
+            Theme.CLICK_INFO.applyAsTitle("Power Capacity", "10,000,000"),
+            Theme.CLICK_INFO.applyAsTitle("Power Consumption", "Item EMC Value (Caps at capacity)")
         );
 
         // endregion

@@ -8,6 +8,7 @@ api-version: 1.16
 depend:
   - Slimefun
 softdepend:
+  - PlaceholderAPI
   - ExoticGarden
   - ColoredEnderChests
   - LuckyBlocks

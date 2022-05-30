@@ -86,6 +86,10 @@
       <id>aikar</id>
       <url>https://repo.aikar.co/content/groups/aikar/</url>
     </repository>
+    <repository>
+      <id>placeholderapi</id>
+      <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
@@ -104,6 +108,12 @@
       <groupId>io.github.sefiraat</groupId>
       <artifactId>networks</artifactId>
       <version>MODIFIED_1.0.7</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.clip</groupId>
+      <artifactId>placeholderapi</artifactId>
+      <version>2.11.1</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

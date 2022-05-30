@@ -40,6 +40,31 @@ public enum Theme {
         return this + string;
     }
 
+    /**
+     * Applies the theme color to a given string
+     *
+     * @param value    The Object (as string) to apply the color to
+     * @return Returns the string provides preceded by the color
+     */
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public String applyToString(@Nonnull Object value) {
+        return this.color + String.valueOf(value);
+    }
+
+    /**
+     * Applies the theme color to the first string and PASSIVE to the second
+     *
+     * @param value1   The Object (as string) to apply the color to
+     * @param value2   The Object (as string) to apply PASSIVE to
+     * @return Returns the string provides preceded by the color
+     */
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public String applyAsTitle(@Nonnull Object value1, @Nonnull Object value2) {
+        return this.color + String.valueOf(value1) + ": " + Theme.PASSIVE + value2;
+    }
+
     public static Theme[] getCachedValues() {
         return cachedValues;
     }
@@ -90,7 +115,7 @@ public enum Theme {
         return Theme.SUCCESS + "Applies Modifiers";
     }
 
-    public static String infoLinePassive(String title, String content) {
+    public static String infoLinePassive(@Nonnull String title, @Nonnull String content) {
         return Theme.CLICK_INFO + title + ": " + Theme.PASSIVE + content;
     }
 
@@ -102,13 +127,27 @@ public enum Theme {
      * Applies the theme color to a given string
      *
      * @param themeType The {@link Theme} to apply the color from
-     * @param string    The string to apply the color to
+     * @param value    The object (as string) to apply the color to
      * @return Returns the string provides preceded by the color
      */
     @Nonnull
     @ParametersAreNonnullByDefault
-    public static String applyThemeToString(Theme themeType, String string) {
-        return themeType.getColor() + string;
+    public static String applyThemeToString(@Nonnull Theme themeType, @Nonnull Object value) {
+        return themeType.getColor() + String.valueOf(value);
+    }
+
+    /**
+     * Applies the theme color to the first string and PASSIVE to the second
+     *
+     * @param themeType The {@link Theme} to apply the color from
+     * @param string1   The string to apply the color to
+     * @param value   The object to apply PASSIVE to as string
+     * @return Returns the string provides preceded by the color
+     */
+    @Nonnull
+    @ParametersAreNonnullByDefault
+    public static String applyThemeAsTitle(@Nonnull Theme themeType, @Nonnull String string1, Object value) {
+        return themeType.getColor() + string1 + ": " + Theme.PASSIVE + value;
     }
 
     public String getLoreLine() {

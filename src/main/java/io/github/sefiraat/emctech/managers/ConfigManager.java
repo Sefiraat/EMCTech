@@ -79,7 +79,6 @@ public class ConfigManager {
 
     public void saveAll() {
         EmcTech.getInstance().getLogger().info("EMCTech saving data.");
-        EmcTech.getInstance().saveConfig();
         this.playerEmc.write();
         this.playerLearnedItems.write();
     }

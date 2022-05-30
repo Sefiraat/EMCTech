@@ -1,5 +1,6 @@
 package io.github.sefiraat.emctech.managers;
 
+import io.github.sefiraat.emctech.emc.EmcPlaceholderExpansion;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 
@@ -10,6 +11,7 @@ public class SupportedPluginManager {
     private boolean networks;
     private boolean dankTech2;
     private boolean infinityExpansion;
+    private boolean placeholderApi;
 
     public SupportedPluginManager() {
         Validate.isTrue(instance == null, "Cannot create a new instance of the SupportedPluginManager");
@@ -21,6 +23,11 @@ public class SupportedPluginManager {
         this.networks = Bukkit.getPluginManager().isPluginEnabled("Networks");
         this.dankTech2 = Bukkit.getPluginManager().isPluginEnabled("DankTech2");
         this.infinityExpansion = Bukkit.getPluginManager().isPluginEnabled("InfinityExpansion");
+        this.placeholderApi = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
+
+        if (this.placeholderApi) {
+            new EmcPlaceholderExpansion().register();
+        }
     }
 
     public static boolean isNetworks() {
@@ -45,6 +52,14 @@ public class SupportedPluginManager {
 
     public static void setInfinityExpansion(boolean infinityExpansion) {
         instance.infinityExpansion = infinityExpansion;
+    }
+
+    public static boolean isPlaceholderApi() {
+        return instance.placeholderApi;
+    }
+
+    public static void setPlaceholderApi(boolean placeholderApi) {
+        instance.placeholderApi = placeholderApi;
     }
 
     public static SupportedPluginManager getInstance() {

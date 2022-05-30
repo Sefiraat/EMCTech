@@ -122,7 +122,7 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
             double emcValue;
 
             if (player == null) {
-                setInvalidPlayer(blockMenu);
+                setPlayerOffline(blockMenu);
                 return;
             }
 
@@ -139,11 +139,12 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
                 return;
             }
 
-            if (!EmcStorage.hasLearnedItem(player,
-                                           slimefunItem == null ?
-                                           templateItemStack.getType().name() :
-                                           slimefunItem.getId(),
-                                           slimefunItem == null
+            if (!EmcStorage.hasLearnedItem(
+                player,
+                slimefunItem == null ?
+                templateItemStack.getType().name() :
+                slimefunItem.getId(),
+                slimefunItem == null
             )) {
                 setUnlearnedItem(blockMenu);
                 return;
@@ -174,8 +175,8 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
         blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_INVALID_ITEM);
     }
 
-    private void setInvalidPlayer(@Nonnull BlockMenu blockMenu) {
-        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_INVALID_PLAYER);
+    private void setPlayerOffline(@Nonnull BlockMenu blockMenu) {
+        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_PLAYER_OFFLINE);
     }
 
     private void setUnlearnedItem(@Nonnull BlockMenu blockMenu) {

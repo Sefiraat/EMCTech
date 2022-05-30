@@ -31,18 +31,19 @@ public abstract class OwnedBlockMenuPreset extends BlockMenuPreset {
     }
 
     @Override
-    public void newInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
-        final String playerString = BlockStorage.getLocationInfo(b.getLocation(), "owner");
+    public void newInstance(@Nonnull BlockMenu menu, @Nonnull Block block) {
+        final String playerString = BlockStorage.getLocationInfo(block.getLocation(), "owner");
 
         if (playerString == null) {
             return;
         }
 
-        ownedVariableTickRateItem.addCache(b,
-                                           new OwnedVariableTickRateItem.OwnedBlockCache(
-                                               UUID.fromString(playerString),
-                                               ownedVariableTickRateItem.getTicksRequired()
-                                           )
+        ownedVariableTickRateItem.addCache(
+            block,
+            new OwnedVariableTickRateItem.OwnedBlockCache(
+                UUID.fromString(playerString),
+                ownedVariableTickRateItem.getTicksRequired()
+            )
         );
     }
 }

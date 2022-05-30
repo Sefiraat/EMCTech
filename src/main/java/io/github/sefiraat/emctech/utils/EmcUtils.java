@@ -8,6 +8,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,11 @@ public final class EmcUtils {
     }
 
     public static final NumberFormat EMC_FORMAT;
+    public static final NumberFormat EMC_FORMAT_GUIDE = new DecimalFormat("#,###");
 
     public static final List<RecipeType> ALLOWABLE_RECIPE_TYPES = new ArrayList<>();
 
     static {
-
         EMC_FORMAT = NumberFormat.getCompactNumberInstance(Locale.ROOT, NumberFormat.Style.SHORT);
         EMC_FORMAT.setMinimumFractionDigits(2);
         EMC_FORMAT.setMaximumFractionDigits(2);
@@ -52,7 +53,6 @@ public final class EmcUtils {
             EmcUtils.addValidRecipeType(SlimefunItem.getById("INFINITY_DUST_EXTRACTOR").getRecipeType());
             plugin.getLogger().info("Adding extended recipes for Infinity Expansion");
         }
-
     }
 
     public static boolean canEmc(@Nonnull ItemStack itemStack) {

@@ -63,22 +63,22 @@ public final class GuiElements {
         Theme.PASSIVE + "This item cannot be converted to/from EMC."
     );
 
-    public static final ItemStack INFO_INVALID_PLAYER = new CustomItemStack(
-        Material.ORANGE_STAINED_GLASS_PANE,
-        Theme.PASSIVE + "Invalid Player",
-        Theme.PASSIVE + "Block player is invalid. Block may need re-placing."
-    );
-
     public static final ItemStack INFO_UNLEARNED_ITEM = new CustomItemStack(
         Material.ORANGE_STAINED_GLASS_PANE,
         Theme.PASSIVE + "Unlearned Item",
         Theme.PASSIVE + "This item has not yet been learned."
     );
 
+    public static final ItemStack INFO_PLAYER_OFFLINE = new CustomItemStack(
+        Material.ORANGE_STAINED_GLASS_PANE,
+        Theme.PASSIVE + "Owner Offline",
+        Theme.PASSIVE + "The owning player is offline."
+    );
+
     public static ItemStack getWorkingOnIcon(@Nonnull String name,
-                                                      double emcValue,
-                                                      int powerRequirement,
-                                                      int currentPower
+                                             double emcValue,
+                                             int powerRequirement,
+                                             int currentPower
     ) {
         return new CustomItemStack(
             Material.GREEN_STAINED_GLASS_PANE,
@@ -96,7 +96,12 @@ public final class GuiElements {
                                                double emcValue,
                                                double emcValueLarge
     ) {
-        return getItemLearnedIcon(itemStack.getType(), name, emcValue, emcValueLarge);
+        return new CustomItemStack(
+            itemStack,
+            Theme.SUCCESS + name,
+            Theme.CLICK_INFO.applyAsTitle("EMC (Incoming)", EmcUtils.EMC_FORMAT_GUIDE.format(emcValue)),
+            Theme.CLICK_INFO.applyAsTitle("EMC (Outgoing)", EmcUtils.EMC_FORMAT_GUIDE.format(emcValueLarge))
+        );
     }
 
     @ParametersAreNonnullByDefault
@@ -108,8 +113,8 @@ public final class GuiElements {
         return new CustomItemStack(
             material,
             Theme.SUCCESS + StringUtils.toTitleCase(name),
-            Theme.CLICK_INFO.applyAsTitle("EMC (Incoming)", EmcUtils.EMC_FORMAT.format(emcValue)),
-            Theme.CLICK_INFO.applyAsTitle("EMC (Outgoing)", EmcUtils.EMC_FORMAT.format(emcValueLarge))
+            Theme.CLICK_INFO.applyAsTitle("EMC (Incoming)", EmcUtils.EMC_FORMAT_GUIDE.format(emcValue)),
+            Theme.CLICK_INFO.applyAsTitle("EMC (Outgoing)", EmcUtils.EMC_FORMAT_GUIDE.format(emcValueLarge))
         );
     }
 

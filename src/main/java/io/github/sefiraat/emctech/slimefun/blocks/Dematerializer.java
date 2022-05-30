@@ -139,12 +139,18 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
                 return;
             }
 
-            final int requiredPower = Math.max(Math.min(((int) emcValue) / 10, 10000000), 1);
             final Player player = getOwner(block);
+
+            if (player == null) {
+                setOfflinePlayer(blockMenu);
+                return;
+            }
+
+            final int requiredPower = Math.max(Math.min(((int) emcValue) / 10, 10000000), 1);
             final int currentCharge = getCharge(block.getLocation());
 
             setWorking(blockMenu, name, emcValue, requiredPower, currentCharge);
-            if (player != null && currentCharge >= requiredPower) {
+            if (currentCharge >= requiredPower) {
                 removeCharge(block.getLocation(), requiredPower);
                 EmcStorage.addEmc(player, emcValue);
                 EmcStorage.learnItem(player, name, slimefunItem == null);
@@ -159,6 +165,10 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
 
     private void setInvalidItem(@Nonnull BlockMenu blockMenu) {
         blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_INVALID_ITEM);
+    }
+
+    private void setOfflinePlayer(@Nonnull BlockMenu blockMenu) {
+        blockMenu.replaceExistingItem(INFO_SLOT, GuiElements.INFO_PLAYER_OFFLINE);
     }
 
     private void setWorking(@Nonnull BlockMenu blockMenu,

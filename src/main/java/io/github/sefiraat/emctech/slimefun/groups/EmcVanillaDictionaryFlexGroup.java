@@ -115,10 +115,11 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
                 if (mode == SlimefunGuideMode.CHEAT_MODE || learned) {
                     menu.replaceExistingItem(
                         slot,
-                        GuiElements.getItemLearnedIcon(Material.valueOf(entry),
-                                                       entry,
-                                                       EmcUtils.getEmcValue(entry),
-                                                       EmcUtils.getEmcValueMultiplied(entry)
+                        GuiElements.getItemLearnedIcon(
+                            Material.valueOf(entry),
+                            entry,
+                            EmcUtils.getEmcValue(entry),
+                            EmcUtils.getEmcValueMultiplied(entry)
                         )
                     );
                 } else {

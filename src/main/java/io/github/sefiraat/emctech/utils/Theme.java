@@ -43,7 +43,7 @@ public enum Theme {
     /**
      * Applies the theme color to a given string
      *
-     * @param value    The Object (as string) to apply the color to
+     * @param value The Object (as string) to apply the color to
      * @return Returns the string provides preceded by the color
      */
     @Nonnull
@@ -55,8 +55,8 @@ public enum Theme {
     /**
      * Applies the theme color to the first string and PASSIVE to the second
      *
-     * @param value1   The Object (as string) to apply the color to
-     * @param value2   The Object (as string) to apply PASSIVE to
+     * @param value1 The Object (as string) to apply the color to
+     * @param value2 The Object (as string) to apply PASSIVE to
      * @return Returns the string provides preceded by the color
      */
     @Nonnull
@@ -127,7 +127,7 @@ public enum Theme {
      * Applies the theme color to a given string
      *
      * @param themeType The {@link Theme} to apply the color from
-     * @param value    The object (as string) to apply the color to
+     * @param value     The object (as string) to apply the color to
      * @return Returns the string provides preceded by the color
      */
     @Nonnull
@@ -141,7 +141,7 @@ public enum Theme {
      *
      * @param themeType The {@link Theme} to apply the color from
      * @param string1   The string to apply the color to
-     * @param value   The object to apply PASSIVE to as string
+     * @param value     The object to apply PASSIVE to as string
      * @return Returns the string provides preceded by the color
      */
     @Nonnull

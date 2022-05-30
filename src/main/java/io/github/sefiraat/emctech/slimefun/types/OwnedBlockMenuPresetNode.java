@@ -38,11 +38,12 @@ public abstract class OwnedBlockMenuPresetNode extends BlockMenuPreset {
             return;
         }
 
-        ownedVariableTickRateItem.addCache(b,
-                                           new OwnedVariableTickRateNode.OwnedBlockCache(
-                                               UUID.fromString(playerString),
-                                               ownedVariableTickRateItem.getTicksRequired()
-                                           )
+        ownedVariableTickRateItem.addCache(
+            b,
+            new OwnedVariableTickRateNode.OwnedBlockCache(
+                UUID.fromString(playerString),
+                ownedVariableTickRateItem.getTicksRequired()
+            )
         );
     }
 }

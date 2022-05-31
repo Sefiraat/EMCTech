@@ -16,6 +16,7 @@ import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -70,6 +71,7 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
         }
 
         chestMenu.setEmptySlotsClickable(false);
+        chestMenu.addMenuOpeningHandler((player) -> player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F));
         setupPage(p, profile, mode, chestMenu, 1);
         chestMenu.open(p);
     }

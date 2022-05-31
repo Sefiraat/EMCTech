@@ -60,7 +60,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
 
     @Override
     @ParametersAreNonnullByDefault
-    public void open(Player player, PlayerProfile profile, SlimefunGuideMode mode) {
+    public void open(Player p, PlayerProfile profile, SlimefunGuideMode mode) {
         final ChestMenu chestMenu = new ChestMenu(Theme.MAIN.getColor() + "EMC Dictionary");
 
         for (int slot : HEADER) {
@@ -72,8 +72,9 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
         }
 
         chestMenu.setEmptySlotsClickable(false);
-        setupPage(player, profile, mode, chestMenu, 1);
-        chestMenu.open(player);
+        chestMenu.addMenuOpeningHandler((player) -> player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F));
+        setupPage(p, profile, mode, chestMenu, 1);
+        chestMenu.open(p);
     }
 
     @ParametersAreNonnullByDefault

@@ -10,6 +10,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -60,6 +61,7 @@ public class MainFlexGroup extends FlexItemGroup {
         }
 
         chestMenu.setEmptySlotsClickable(false);
+        chestMenu.addMenuOpeningHandler((player) -> player.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F));
         setupPage(p, profile, mode, chestMenu);
         chestMenu.open(p);
     }

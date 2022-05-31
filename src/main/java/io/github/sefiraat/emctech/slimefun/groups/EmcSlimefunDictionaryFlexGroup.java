@@ -163,6 +163,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
             final int previousPage = page - 1;
             if (previousPage >= 1) {
                 setupPage(player1, profile, mode, menu, previousPage);
+                player1.playSound(player1.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             return false;
         });
@@ -172,6 +173,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
             final int nextPage = page + 1;
             if (nextPage <= totalPages) {
                 setupPage(player1, profile, mode, menu, nextPage);
+                player1.playSound(player1.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             return false;
         });

@@ -62,11 +62,11 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
         final ChestMenu chestMenu = new ChestMenu(Theme.MAIN.getColor() + "EMC Dictionary");
 
         for (int slot : HEADER) {
-            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), (player1, i1, itemStack, clickAction) -> false);
+            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
         for (int slot : FOOTER) {
-            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), (player1, i1, itemStack, clickAction) -> false);
+            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
         chestMenu.setEmptySlotsClickable(false);
@@ -103,7 +103,7 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
 
         // Stats
         menu.replaceExistingItem(GUIDE_STATS, getPlayerInfoStack(player, numberOfEntries));
-        menu.addMenuClickHandler(GUIDE_STATS, (player1, slot, itemStack, clickAction) -> false);
+        menu.addMenuClickHandler(GUIDE_STATS, ChestMenuUtils.getEmptyClickHandler());
 
         for (int i = 0; i < 36; i++) {
             final int slot = i + 9;
@@ -128,7 +128,7 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
             } else {
                 menu.replaceExistingItem(slot, null);
             }
-            menu.addMenuClickHandler(slot, (player1, i1, itemStack1, clickAction) -> false);
+            menu.addMenuClickHandler(slot, ChestMenuUtils.getEmptyClickHandler());
         }
     }
 
@@ -142,7 +142,7 @@ public class EmcVanillaDictionaryFlexGroup extends FlexItemGroup {
     ) {
         for (int slot : FOOTER) {
             menu.replaceExistingItem(slot, ChestMenuUtils.getBackground());
-            menu.addMenuClickHandler(slot, ((player, i, itemStack, clickAction) -> false));
+            menu.addMenuClickHandler(slot, ChestMenuUtils.getEmptyClickHandler());
         }
 
         menu.replaceExistingItem(PAGE_PREVIOUS, ChestMenuUtils.getPreviousButton(p, page, totalPages));

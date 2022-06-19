@@ -210,6 +210,7 @@ public class Dematerializer extends OwnedVariableTickRateItem implements EnergyN
                 for (int i : INPUT_BACKGROUND) {
                     addItem(i, GuiElements.TEMPLATE_INPUT_CARGO, ChestMenuUtils.getEmptyClickHandler());
                 }
+                addItem(INFO_SLOT, GuiElements.INFO_NOT_WORKING, ChestMenuUtils.getEmptyClickHandler());
             }
 
             @Override

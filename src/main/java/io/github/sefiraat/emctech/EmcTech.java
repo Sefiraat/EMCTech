@@ -11,12 +11,18 @@ import io.github.sefiraat.emctech.managers.SupportedPluginManager;
 import io.github.sefiraat.emctech.slimefun.items.EmcItems;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.AdvancedPie;
+import org.bukkit.Material;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class EmcTech extends JavaPlugin implements SlimefunAddon {
     private static EmcTech instance;
@@ -57,6 +63,7 @@ public class EmcTech extends JavaPlugin implements SlimefunAddon {
 
         EmcItems.setup();
         EmcCalculator.setup();
+        setupBstats();
     }
 
     @Override
@@ -84,6 +91,10 @@ public class EmcTech extends JavaPlugin implements SlimefunAddon {
     @Override
     public String getBugTrackerURL() {
         return MessageFormat.format("https://github.com/{0}/{1}/issues/", this.username, this.repo);
+    }
+
+    private void setupBstats() {
+        Metrics metrics = new Metrics(this, 15351);
     }
 
     public static EmcTech getInstance() {

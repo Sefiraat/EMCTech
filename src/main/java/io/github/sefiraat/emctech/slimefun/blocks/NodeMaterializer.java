@@ -223,6 +223,7 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
                 for (int i : OUTPUT_BACKGROUND) {
                     addItem(i, GuiElements.TEMPLATE_OUTPUT_CARGO, ChestMenuUtils.getEmptyClickHandler());
                 }
+                addItem(INFO_SLOT, GuiElements.INFO_NOT_WORKING, ChestMenuUtils.getEmptyClickHandler());
             }
 
             @Override

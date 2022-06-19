@@ -1,7 +1,7 @@
 package io.github.sefiraat.emctech.managers;
 
+import com.google.common.base.Preconditions;
 import io.github.sefiraat.emctech.emc.EmcPlaceholderExpansion;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 
 public class SupportedPluginManager {
@@ -14,7 +14,7 @@ public class SupportedPluginManager {
     private boolean placeholderApi;
 
     public SupportedPluginManager() {
-        Validate.isTrue(instance == null, "Cannot create a new instance of the SupportedPluginManager");
+        Preconditions.checkArgument(instance == null, "Cannot create a new instance of the SupportedPluginManager");
         instance = this;
         setup();
     }

@@ -1,5 +1,5 @@
 <p align="center">
-<img width="800" src="https://github.com/Sefiraat/EMCTech/blob/master/images/logo/logo.svg"><br><br>
+<img width="800" src="https://github.com/Sefiraat/EMCTech/blob/master/images/logos/logo.svg"><br><br>
 </p>
 
 # EMCTech

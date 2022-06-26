@@ -20,3 +20,11 @@ higher power capacity which, in turn, allows for a wider variety of items to be 
 
 An item must be 'learned' before you can Materialize it. This is a simple process as items are automatically learned the
 first time you dematerialize them.
+
+## PlaceholderAPI
+
+EMCTech supports PlaceholderAPI.
+
+- `%emctech_current_emc%` - Current EMC of player
+- `%emctech_amount_learned_vanilla%` - The amount of vanilla items that player has learned
+- `%emctech_amount_learned_slimefun%` - The amount of Slimefon items that player has learned

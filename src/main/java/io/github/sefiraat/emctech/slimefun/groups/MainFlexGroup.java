@@ -10,6 +10,7 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -52,14 +53,15 @@ public class MainFlexGroup extends FlexItemGroup {
         final ChestMenu chestMenu = new ChestMenu(Theme.MAIN.getColor() + "EMC Tech");
 
         for (int slot : HEADER) {
-            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), (player1, i1, itemStack, clickAction) -> false);
+            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
         for (int slot : FOOTER) {
-            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), (player1, i1, itemStack, clickAction) -> false);
+            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
         chestMenu.setEmptySlotsClickable(false);
+        chestMenu.addMenuOpeningHandler((player) -> player.playSound(p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F));
         setupPage(p, profile, mode, chestMenu);
         chestMenu.open(p);
     }
@@ -68,7 +70,7 @@ public class MainFlexGroup extends FlexItemGroup {
     private void setupPage(Player player, PlayerProfile profile, SlimefunGuideMode mode, ChestMenu menu) {
         for (int slot : FOOTER) {
             menu.replaceExistingItem(slot, ChestMenuUtils.getBackground());
-            menu.addMenuClickHandler(slot, ((player1, i, itemStack, clickAction) -> false));
+            menu.addMenuClickHandler(slot, ChestMenuUtils.getEmptyClickHandler());
         }
 
         // Back

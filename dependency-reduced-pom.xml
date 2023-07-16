@@ -37,8 +37,8 @@
               <shadedPattern>io.github.sefiraat.emctech.bstats</shadedPattern>
             </relocation>
             <relocation>
-              <pattern>io.github.sefiraat.sefilib</pattern>
-              <shadedPattern>io.github.sefiraat.emctech.sefilib</shadedPattern>
+              <pattern>dev.sefiraat.sefilib</pattern>
+              <shadedPattern>dev.sefiraat.emctech.sefilib</shadedPattern>
             </relocation>
             <relocation>
               <pattern>co.aikar.commands</pattern>

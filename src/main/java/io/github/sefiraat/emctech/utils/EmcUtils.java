@@ -1,18 +1,20 @@
 package io.github.sefiraat.emctech.utils;
 
-import io.github.sefiraat.emctech.EmcTech;
-import io.github.sefiraat.emctech.emc.EmcCalculator;
-import io.github.sefiraat.emctech.managers.SupportedPluginManager;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import javax.annotation.Nonnull;
+
+import org.bukkit.inventory.ItemStack;
+
+import io.github.sefiraat.emctech.EmcTech;
+import io.github.sefiraat.emctech.emc.EmcCalculator;
+import io.github.sefiraat.emctech.managers.SupportedPluginManager;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 
 public final class EmcUtils {
 

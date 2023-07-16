@@ -1,7 +1,8 @@
 package io.github.sefiraat.emctech.managers;
 
-import io.github.sefiraat.emctech.EmcTech;
 import org.bukkit.event.Listener;
+
+import io.github.sefiraat.emctech.EmcTech;
 
 public class ListenerManager {
 

@@ -1,10 +1,12 @@
 package io.github.sefiraat.emctech.emc;
 
-import io.github.sefiraat.emctech.EmcTech;
-import io.github.sefiraat.emctech.managers.ConfigManager;
-import io.github.sefiraat.emctech.utils.EmcUtils;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.CookingRecipe;
@@ -15,11 +17,11 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.StonecuttingRecipe;
 
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import io.github.sefiraat.emctech.EmcTech;
+import io.github.sefiraat.emctech.managers.ConfigManager;
+import io.github.sefiraat.emctech.utils.EmcUtils;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public final class EmcCalculator {
 

@@ -1,12 +1,14 @@
 package io.github.sefiraat.emctech.slimefun.types;
 
+import java.util.UUID;
+
+import javax.annotation.Nonnull;
+
+import org.bukkit.block.Block;
+
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import org.bukkit.block.Block;
-
-import javax.annotation.Nonnull;
-import java.util.UUID;
 
 public abstract class OwnedBlockMenuPresetNode extends BlockMenuPreset {
 

@@ -1,11 +1,12 @@
 package io.github.sefiraat.emctech.slimefun.groups;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import io.github.sefiraat.emctech.EmcTech;
 import io.github.sefiraat.emctech.utils.Keys;
 import io.github.sefiraat.emctech.utils.Theme;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public final class EmcTechItemGroups {
 

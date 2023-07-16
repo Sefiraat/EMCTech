@@ -1,10 +1,12 @@
 package io.github.sefiraat.emctech.emc;
 
-import io.github.sefiraat.emctech.utils.EmcUtils;
-import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import io.github.sefiraat.emctech.utils.EmcUtils;
+
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 
 public class EmcPlaceholderExpansion extends PlaceholderExpansion {
     @Override

@@ -17,6 +17,7 @@ import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -59,20 +60,21 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
 
     @Override
     @ParametersAreNonnullByDefault
-    public void open(Player player, PlayerProfile profile, SlimefunGuideMode mode) {
+    public void open(Player p, PlayerProfile profile, SlimefunGuideMode mode) {
         final ChestMenu chestMenu = new ChestMenu(Theme.MAIN.getColor() + "EMC Dictionary");
 
         for (int slot : HEADER) {
-            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), (player1, i1, itemStack, clickAction) -> false);
+            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
         for (int slot : FOOTER) {
-            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), (player1, i1, itemStack, clickAction) -> false);
+            chestMenu.addItem(slot, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
         chestMenu.setEmptySlotsClickable(false);
-        setupPage(player, profile, mode, chestMenu, 1);
-        chestMenu.open(player);
+        chestMenu.addMenuOpeningHandler((player) -> player.playSound(player.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F));
+        setupPage(p, profile, mode, chestMenu, 1);
+        chestMenu.open(p);
     }
 
     @ParametersAreNonnullByDefault
@@ -111,7 +113,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
 
         // Stats
         menu.replaceExistingItem(GUIDE_STATS, getPlayerInfoStack(player, numberOfEntries));
-        menu.addMenuClickHandler(GUIDE_STATS, (player1, slot, itemStack, clickAction) -> false);
+        menu.addMenuClickHandler(GUIDE_STATS, ChestMenuUtils.getEmptyClickHandler());
 
         for (int i = 0; i < 36; i++) {
             final int slot = i + 9;
@@ -139,7 +141,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
             } else {
                 menu.replaceExistingItem(slot, null);
             }
-            menu.addMenuClickHandler(slot, (player1, i1, itemStack1, clickAction) -> false);
+            menu.addMenuClickHandler(slot, ChestMenuUtils.getEmptyClickHandler());
         }
     }
 
@@ -153,7 +155,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
     ) {
         for (int slot : FOOTER) {
             menu.replaceExistingItem(slot, ChestMenuUtils.getBackground());
-            menu.addMenuClickHandler(slot, ((player, i, itemStack, clickAction) -> false));
+            menu.addMenuClickHandler(slot, ChestMenuUtils.getEmptyClickHandler());
         }
 
         menu.replaceExistingItem(PAGE_PREVIOUS, ChestMenuUtils.getPreviousButton(p, page, totalPages));
@@ -161,6 +163,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
             final int previousPage = page - 1;
             if (previousPage >= 1) {
                 setupPage(player1, profile, mode, menu, previousPage);
+                player1.playSound(player1.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             return false;
         });
@@ -170,6 +173,7 @@ public class EmcSlimefunDictionaryFlexGroup extends FlexItemGroup {
             final int nextPage = page + 1;
             if (nextPage <= totalPages) {
                 setupPage(player1, profile, mode, menu, nextPage);
+                player1.playSound(player1.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1.0F, 1.0F);
             }
             return false;
         });

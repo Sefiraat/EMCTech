@@ -190,10 +190,12 @@ public class Materializer extends OwnedVariableTickRateItem implements EnergyNet
                             int requiredPower,
                             int currentPower
     ) {
-        blockMenu.replaceExistingItem(
-            INFO_SLOT,
-            GuiElements.getWorkingOnIcon(name, emcValue, requiredPower, currentPower)
-        );
+        if (blockMenu.hasViewer()) {
+            blockMenu.replaceExistingItem(
+                INFO_SLOT,
+                GuiElements.getWorkingOnIcon(name, emcValue, requiredPower, currentPower)
+            );
+        }
     }
 
     protected void reject(@Nonnull BlockMenu blockMenu, @Nonnull ItemStack itemStack) {

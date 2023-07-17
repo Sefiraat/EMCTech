@@ -22,7 +22,7 @@
                             <shadedPattern>io.github.sefiraat.emctech.bstats</shadedPattern>
                         </relocation>
                         <relocation>
-                            <pattern>io.github.sefiraat.sefilib</pattern>
+                            <pattern>dev.sefiraat.sefilib</pattern>
                             <shadedPattern>io.github.sefiraat.emctech.sefilib</shadedPattern>
                         </relocation>
                         <relocation>
@@ -106,11 +106,6 @@
             <url>https://jitpack.io</url>
         </repository>
         <repository>
-            <id>sefi-central</id>
-            <name>Sefiraat</name>
-            <url>https://sefiraat.jfrog.io/artifactory/default-maven-local</url>
-        </repository>
-        <repository>
             <id>aikar</id>
             <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
@@ -148,9 +143,9 @@
             <version>3.0.1u2</version>
         </dependency>
         <dependency>
-            <groupId>io.github.sefiraat</groupId>
+            <groupId>dev.sefiraat</groupId>
             <artifactId>SefiLib</artifactId>
-            <version>0.1.0</version>
+            <version>0.2.6</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -167,9 +162,9 @@
 
         <!-- Supported Plugins -->
         <dependency>
-            <groupId>io.github.sefiraat</groupId>
+            <groupId>dev.sefiraat</groupId>
             <artifactId>networks</artifactId>
-            <version>MODIFIED_1.0.7</version>
+            <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

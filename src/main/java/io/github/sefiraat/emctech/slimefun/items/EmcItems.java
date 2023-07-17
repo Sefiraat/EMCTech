@@ -1,5 +1,7 @@
 package io.github.sefiraat.emctech.slimefun.items;
 
+import org.bukkit.inventory.ItemStack;
+
 import io.github.sefiraat.emctech.EmcTech;
 import io.github.sefiraat.emctech.managers.SupportedPluginManager;
 import io.github.sefiraat.emctech.slimefun.blocks.Dematerializer;
@@ -7,11 +9,11 @@ import io.github.sefiraat.emctech.slimefun.blocks.Materializer;
 import io.github.sefiraat.emctech.slimefun.blocks.NodeMaterializer;
 import io.github.sefiraat.emctech.slimefun.groups.EmcTechItemGroups;
 import io.github.sefiraat.networks.slimefun.NetworksSlimefunItemStacks;
-import io.github.sefiraat.sefilib.itemstacks.GeneralItemStackUtils;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
-import org.bukkit.inventory.ItemStack;
+
+import dev.sefiraat.sefilib.itemstacks.GeneralItemStackUtils;
 
 public class EmcItems {
 

@@ -1,9 +1,10 @@
 package io.github.sefiraat.emctech.utils;
 
-import io.github.sefiraat.emctech.EmcTech;
+import javax.annotation.Nonnull;
+
 import org.bukkit.NamespacedKey;
 
-import javax.annotation.Nonnull;
+import io.github.sefiraat.emctech.EmcTech;
 
 public final class Keys {
 

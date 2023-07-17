@@ -1,5 +1,13 @@
 package io.github.sefiraat.emctech.slimefun.blocks;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import io.github.sefiraat.emctech.emc.EmcStorage;
 import io.github.sefiraat.emctech.slimefun.types.OwnedBlockMenuPresetNode;
 import io.github.sefiraat.emctech.slimefun.types.OwnedVariableTickRateNode;
@@ -15,16 +23,10 @@ import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponen
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class NodeMaterializer extends OwnedVariableTickRateNode implements EnergyNetComponent {
 
@@ -191,10 +193,12 @@ public class NodeMaterializer extends OwnedVariableTickRateNode implements Energ
                             int requiredPower,
                             int currentPower
     ) {
-        blockMenu.replaceExistingItem(
-            INFO_SLOT,
-            GuiElements.getWorkingOnIcon(name, emcValue, requiredPower, currentPower)
-        );
+        if (blockMenu.hasViewer()) {
+            blockMenu.replaceExistingItem(
+                INFO_SLOT,
+                GuiElements.getWorkingOnIcon(name, emcValue, requiredPower, currentPower)
+            );
+        }
     }
 
     protected void reject(@Nonnull BlockMenu blockMenu, @Nonnull ItemStack itemStack) {

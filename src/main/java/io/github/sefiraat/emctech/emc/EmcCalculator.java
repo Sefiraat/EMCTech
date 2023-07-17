@@ -1,10 +1,12 @@
 package io.github.sefiraat.emctech.emc;
 
-import io.github.sefiraat.emctech.EmcTech;
-import io.github.sefiraat.emctech.managers.ConfigManager;
-import io.github.sefiraat.emctech.utils.EmcUtils;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.CookingRecipe;
@@ -15,11 +17,11 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.StonecuttingRecipe;
 
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import io.github.sefiraat.emctech.EmcTech;
+import io.github.sefiraat.emctech.managers.ConfigManager;
+import io.github.sefiraat.emctech.utils.EmcUtils;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 
 public final class EmcCalculator {
 
@@ -29,6 +31,10 @@ public final class EmcCalculator {
     private static final Map<String, Double> SLIMEFUN_EMC_VALUES = new HashMap<>();
     private static final Map<String, Double> VANILLA_EMC_VALUES_MULTIPLIED = new HashMap<>();
     private static final Map<String, Double> SLIMEFUN_EMC_VALUES_MULTIPLIED = new HashMap<>();
+    private static Map<String, Double> vanillaEmcValuesFiltered;
+    private static Map<String, Double> slimefunEmcValuesFiltered;
+    private static Map<String, Double> vanillaEmcValuesMultipliedFiltered;
+    private static Map<String, Double> slimefunEmcValuesMultipliedFiltered;
 
     private EmcCalculator() {
         throw new IllegalStateException("Utility class");
@@ -37,7 +43,11 @@ public final class EmcCalculator {
     public static void setup() {
         addBaseValues();
         setupVanilla();
+        vanillaEmcValuesFiltered = cleanMap(new HashMap<>(VANILLA_EMC_VALUES));
+        vanillaEmcValuesMultipliedFiltered = cleanMap(new HashMap<>(VANILLA_EMC_VALUES_MULTIPLIED));
         setupSlimefun();
+        slimefunEmcValuesFiltered = cleanMap(new HashMap<>(SLIMEFUN_EMC_VALUES));
+        slimefunEmcValuesMultipliedFiltered = cleanMap(new HashMap<>(SLIMEFUN_EMC_VALUES_MULTIPLIED));
     }
 
     private static void addBaseValues() {
@@ -473,19 +483,19 @@ public final class EmcCalculator {
     }
 
     public static Map<String, Double> getVanillaEmcValuesFiltered() {
-        return cleanMap(new HashMap<>(VANILLA_EMC_VALUES));
+        return vanillaEmcValuesFiltered;
     }
 
     public static Map<String, Double> getSlimefunEmcValuesFiltered() {
-        return cleanMap(new HashMap<>(SLIMEFUN_EMC_VALUES));
+        return slimefunEmcValuesFiltered;
     }
 
     public static Map<String, Double> getMultipliedVanillaEmcValuesFiltered() {
-        return cleanMap(new HashMap<>(VANILLA_EMC_VALUES_MULTIPLIED));
+        return vanillaEmcValuesMultipliedFiltered;
     }
 
     public static Map<String, Double> getMultipliedSlimefunEmcValuesFiltered() {
-        return cleanMap(new HashMap<>(SLIMEFUN_EMC_VALUES_MULTIPLIED));
+        return slimefunEmcValuesMultipliedFiltered;
     }
 
     private static Map<String, Double> cleanMap(Map<String, Double> map) {

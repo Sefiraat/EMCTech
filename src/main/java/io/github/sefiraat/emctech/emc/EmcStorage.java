@@ -1,13 +1,15 @@
 package io.github.sefiraat.emctech.emc;
 
-import io.github.sefiraat.emctech.managers.ConfigManager;
-import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.bukkit.entity.Player;
+
+import io.github.sefiraat.emctech.managers.ConfigManager;
 
 public final class EmcStorage {
 

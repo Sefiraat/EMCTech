@@ -1,7 +1,8 @@
 package io.github.sefiraat.emctech.runnables;
 
-import io.github.sefiraat.emctech.managers.ConfigManager;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import io.github.sefiraat.emctech.managers.ConfigManager;
 
 public class SaveConfigRunnable extends BukkitRunnable {
 

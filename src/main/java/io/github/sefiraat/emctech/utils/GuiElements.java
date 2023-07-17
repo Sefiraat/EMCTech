@@ -1,14 +1,17 @@
 package io.github.sefiraat.emctech.utils;
 
-import io.github.sefiraat.sefilib.string.StringUtils;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
+import java.text.MessageFormat;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.text.MessageFormat;
+
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+
+import dev.sefiraat.sefilib.string.TextUtils;
+import net.md_5.bungee.api.ChatColor;
 
 public final class GuiElements {
 
@@ -112,7 +115,7 @@ public final class GuiElements {
     ) {
         return new CustomItemStack(
             material,
-            Theme.SUCCESS + StringUtils.toTitleCase(name),
+            Theme.SUCCESS + TextUtils.toTitleCase(name),
             Theme.CLICK_INFO.applyAsTitle("EMC (Incoming)", EmcUtils.EMC_FORMAT_GUIDE.format(emcValue)),
             Theme.CLICK_INFO.applyAsTitle("EMC (Outgoing)", EmcUtils.EMC_FORMAT_GUIDE.format(emcValueLarge))
         );

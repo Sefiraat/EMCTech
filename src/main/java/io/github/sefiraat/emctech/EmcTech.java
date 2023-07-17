@@ -1,7 +1,15 @@
 package io.github.sefiraat.emctech;
 
 
-import co.aikar.commands.PaperCommandManager;
+import java.text.MessageFormat;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.bstats.bukkit.Metrics;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import io.github.sefiraat.emctech.commands.EmcTechMain;
 import io.github.sefiraat.emctech.emc.EmcCalculator;
 import io.github.sefiraat.emctech.managers.ConfigManager;
@@ -11,18 +19,8 @@ import io.github.sefiraat.emctech.managers.SupportedPluginManager;
 import io.github.sefiraat.emctech.slimefun.items.EmcItems;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
-import org.bstats.bukkit.Metrics;
-import org.bstats.charts.AdvancedPie;
-import org.bukkit.Material;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import co.aikar.commands.PaperCommandManager;
 
 public class EmcTech extends JavaPlugin implements SlimefunAddon {
     private static EmcTech instance;

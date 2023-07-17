@@ -1,5 +1,13 @@
 package io.github.sefiraat.emctech.commands;
 
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import io.github.sefiraat.emctech.EmcTech;
+import io.github.sefiraat.emctech.emc.EmcStorage;
+import io.github.sefiraat.emctech.utils.EmcUtils;
+import io.github.sefiraat.emctech.utils.Theme;
+
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
@@ -8,12 +16,6 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
-import io.github.sefiraat.emctech.EmcTech;
-import io.github.sefiraat.emctech.emc.EmcStorage;
-import io.github.sefiraat.emctech.utils.EmcUtils;
-import io.github.sefiraat.emctech.utils.Theme;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 @CommandAlias("emctech|emc")
 public class EmcTechMain extends BaseCommand {

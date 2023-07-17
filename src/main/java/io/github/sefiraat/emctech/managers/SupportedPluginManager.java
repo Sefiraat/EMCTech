@@ -1,8 +1,10 @@
 package io.github.sefiraat.emctech.managers;
 
-import com.google.common.base.Preconditions;
-import io.github.sefiraat.emctech.emc.EmcPlaceholderExpansion;
 import org.bukkit.Bukkit;
+
+import com.google.common.base.Preconditions;
+
+import io.github.sefiraat.emctech.emc.EmcPlaceholderExpansion;
 
 public class SupportedPluginManager {
 

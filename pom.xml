@@ -162,9 +162,9 @@
 
         <!-- Supported Plugins -->
         <dependency>
-            <groupId>io.github.sefiraat</groupId>
+            <groupId>dev.sefiraat</groupId>
             <artifactId>networks</artifactId>
-            <version>MODIFIED_1.0.7</version>
+            <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
